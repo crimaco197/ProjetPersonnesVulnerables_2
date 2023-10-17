@@ -1,7 +1,14 @@
-package org.project;
+package org.example;
+import javax.swing.*;
+import java.awt.event.*;
+public class Main extends JFrame {
 
-public class Main {
+
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        JFrame frame = new frameGUI();
     }
+
 }
+
+
