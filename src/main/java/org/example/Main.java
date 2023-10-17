@@ -1,6 +1,8 @@
 package org.example;
+import org.Views.frameGUI;
+
 import javax.swing.*;
-import java.awt.event.*;
+
 public class Main extends JFrame {
 
 

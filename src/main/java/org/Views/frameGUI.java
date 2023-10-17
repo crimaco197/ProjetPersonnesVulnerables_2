@@ -1,4 +1,4 @@
-package org.example;
+package org.Views;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
