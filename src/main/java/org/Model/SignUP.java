@@ -20,68 +20,84 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JSeparator;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
 public class SignUP extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_1;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField textField;
+    private JTextField textField_3;
+    private JTextField textField_4;
+    private JTextField textField_5;
+    private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SignUP frame = new SignUP();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    SignUP frame = new SignUP();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public SignUP() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 511);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public SignUP() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 800, 511);
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.LIGHT_GRAY);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(217, 10, 1, 1);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(64, 128, 128));
-		panel_1.setBounds(0, 0, 382, 469);
-		contentPane.add(panel_1);
-		
-		JLabel lblNewLabel = new JLabel("");
-		panel_1.add(lblNewLabel);
-		
-		Button button = new Button("Sign_up");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		button.setForeground(new Color(255, 255, 255));
-		button.setBackground(Color.GRAY);
-		button.setBounds(518, 386, 155, 36);
-		contentPane.add(button);
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.LIGHT_GRAY);
+        panel_1.setBounds(0, 0, 382, 469);
+        contentPane.add(panel_1);
+
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg")));
+
+        // Redimensionner l'image pour correspondre aux dimensions du panel_1
+        ImageIcon imageIcon = new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg"));
+        java.awt.Image image = imageIcon.getImage().getScaledInstance(panel_1.getWidth(), panel_1.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        lblNewLabel_1.setIcon(new ImageIcon(image));
+
+        panel_1.add(lblNewLabel_1);
+
+        Button button = new Button("Sign_up");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        button.setFont(new Font("Arial Black", Font.PLAIN, 12));
+        button.setForeground(new Color(255, 255, 255));
+        button.setBackground(Color.GREEN);
+        button.setBounds(518, 386, 155, 36);
+        contentPane.add(button);
+
+        // ... (Le reste de votre code reste inchangé)
+    
+
+
 		
 		textField = new JTextField();
 		textField.setColumns(10);
