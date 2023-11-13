@@ -74,18 +74,21 @@ public class SignUP extends JFrame {
         contentPane.add(panel_1);
 
         JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg")));
+        //lblNewLabel_1.setIcon(new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg")));
 
         // Redimensionner l'image pour correspondre aux dimensions du panel_1
-        ImageIcon imageIcon = new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg"));
+        /*ImageIcon imageIcon = new ImageIcon(SignUP.class.getResource("/images/appbenevol.jpg"));
         java.awt.Image image = imageIcon.getImage().getScaledInstance(panel_1.getWidth(), panel_1.getHeight(), java.awt.Image.SCALE_SMOOTH);
-        lblNewLabel_1.setIcon(new ImageIcon(image));
+        lblNewLabel_1.setIcon(new ImageIcon(image));*/
 
         panel_1.add(lblNewLabel_1);
 
         Button button = new Button("Sign_up");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+				DatabaseConnector connexion = new DatabaseConnector();
+				User newUser = new User(textField.getText(), textField_3.getText(), textField_5.getText(),textField_4.getText(), textField_1.getText());
+				connexion.CreateUser(newUser);
             }
         });
         button.setFont(new Font("Arial Black", Font.PLAIN, 12));
