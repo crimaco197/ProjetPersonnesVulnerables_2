@@ -87,7 +87,7 @@ public class SignUP extends JFrame {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 				DatabaseConnector connexion = new DatabaseConnector();
-				User newUser = new User(textField.getText(), textField_3.getText(), textField_5.getText(),textField_4.getText(), textField_1.getText());
+				User newUser = new User(textField_3.getText(), textField.getText(), textField_5.getText(),textField_4.getText(), textField_1.getText());
 				connexion.CreateUser(newUser);
             }
         });
