@@ -1,110 +1,146 @@
 package org.Model;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Button;
-import java.awt.event.ActionListener;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private JTextField textField;
-    private JTextField textField_1;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+    private JTextField email;
+    private JTextField password;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Login frame = new Login();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    public Login() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	public Login() {
+		initComponents();
+		setVisible(true);
+	}
+	
+	
+	/**
+	 * Create the frame.
+	 */
+	private void initComponents() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 511);
         contentPane = new JPanel();
         contentPane.setBackground(Color.LIGHT_GRAY);
-        contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JPanel panel_1 = new JPanel();
-        panel_1.setBackground(Color.LIGHT_GRAY);
-        panel_1.setBounds(0, 0, 382, 469);
-        contentPane.add(panel_1);
-
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setBackground(Color.WHITE);
-        lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-
-        // Charger l'image et la redimensionner
-        ImageIcon imageIcon = new ImageIcon(Login.class.getResource("/images/appbenevol.jpg"));
-        java.awt.Image image = imageIcon.getImage().getScaledInstance(382, 469, java.awt.Image.SCALE_SMOOTH);
-
-        // Mettre l'image redimensionnée dans le JLabel
-        lblNewLabel_1.setIcon(new ImageIcon(image));
-
-        panel_1.add(lblNewLabel_1);
-
-        JLabel lblNewLabel = new JLabel("");
-        panel_1.add(lblNewLabel);
-
-        Button button = new Button("Login");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
+        
+        
+        
+        // RIGHT PANEL
+        JPanel contentPane_Right = new JPanel();
+        contentPane_Right.setLayout(null);
+        contentPane_Right.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane_Right.setBackground(Color.LIGHT_GRAY);
+        contentPane_Right.setBounds(400, 0, 400, 483);
+        contentPane.add(contentPane_Right);
+        
+        JLabel label_login = new JLabel("LOGIN");
+        label_login.setHorizontalAlignment(SwingConstants.CENTER);
+        label_login.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+        label_login.setBounds(150, 30, 100, 50);
+        contentPane_Right.add(label_login);
+        
+        JLabel email_1 = new JLabel("Email");
+        email_1.setBounds(80, 177, 78, 13);
+        contentPane_Right.add(email_1);
+        
+        email = new JTextField();
+        email.setColumns(10);
+        email.setBounds(80, 189, 267, 28);
+        contentPane_Right.add(email);
+        
+        JLabel password_1 = new JLabel("Password");
+        password_1.setBounds(80, 227, 78, 13);
+        contentPane_Right.add(password_1);
+        
+        password = new JTextField();
+        password.setColumns(10);
+        password.setBounds(80, 239, 267, 28);
+        contentPane_Right.add(password);
+        
+        JLabel label_toSIGNUP = new JLabel("Create an account ?");
+        label_toSIGNUP.setBounds(80, 279, 199, 16);
+        contentPane_Right.add(label_toSIGNUP);
+        
+        //BUTTON TO SIGNUP
+        JButton btn_toSignUp = new JButton("Sign Up");
+        btn_toSignUp.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		SignUP signupFrame = new SignUP();
+        		signupFrame.setVisible(true);
+        		Login.this.dispose();
+        		System.out.println("you have change To Sign Up");
+        	}
         });
-        button.setFont(new Font("Arial Black", Font.PLAIN, 12));
-        button.setForeground(new Color(255, 255, 255));
-        button.setBackground(Color.BLUE);
-        button.setBounds(503, 311, 155, 36);
-        contentPane.add(button);
+        
+        btn_toSignUp.setForeground(new Color(0, 128, 128));
+        btn_toSignUp.setBackground(new Color(192, 192, 192));
+        btn_toSignUp.setBounds(270, 274, 80, 29);
+        contentPane_Right.add(btn_toSignUp);
+        
+        //BUTTON LOGIN
+        JButton btn_Login = new JButton("Login");
+        btn_Login.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+			//	DatabaseConnector connexion = new DatabaseConnector();
+			//	User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText(), password.getText());
+			//	connexion.CreateUser(newUser);
+        		
+        		System.out.println("You have login");
+        	}
+        });
+        btn_Login.setForeground(new Color(0, 128, 128));
+        btn_Login.setBackground(new Color(0, 128, 128));
+        btn_Login.setBounds(150, 330, 100, 40);
+        contentPane_Right.add(btn_Login);
+        
+        
+        // LEFT PANEL
+        JPanel contentPane_Left = new JPanel();
+        contentPane_Left.setLayout(null);
+        contentPane_Left.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane_Left.setBackground(new Color(0, 128, 128));
+        contentPane_Left.setBounds(0, 0, 400, 483);
+        contentPane.add(contentPane_Left);
+        
+        ImageIcon icon = new ImageIcon(Login.class.getResource("/images/healthcare.png"));
+        Image image = icon.getImage();
+        int width = 150;
+        int height = 150;
+        Image newimg = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(456, 187, 267, 28);
-        contentPane.add(textField);
-
-        JSeparator separator_1_2 = new JSeparator();
-        separator_1_2.setBounds(459, 214, 264, 1);
-        contentPane.add(separator_1_2);
-
-        JLabel lblNom = new JLabel("Nom");
-        lblNom.setBounds(456, 174, 78, 13);
-        contentPane.add(lblNom);
-
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(456, 252, 267, 36);
-        contentPane.add(textField_1);
-
-        JSeparator separator_1_5_1 = new JSeparator();
-        separator_1_5_1.setBounds(456, 287, 264, 1);
-        contentPane.add(separator_1_5_1);
-
-        JLabel lblMotDePasse_3_1 = new JLabel("Mot de passe");
-        lblMotDePasse_3_1.setBounds(456, 240, 78, 13);
-        contentPane.add(lblMotDePasse_3_1);
-
-        JLabel lblNewLabel_2 = new JLabel("New label");
-        lblNewLabel_2.setBounds(124, 456, 45, 13);
-        contentPane.add(lblNewLabel_2);
-    }
+     
+        JLabel logo = new JLabel(icon);
+        logo.setBounds(100, 50, 200, 200);
+        contentPane_Left.add(logo);
+        
+        JLabel label_NameAPP = new JLabel("VULNERABLES");
+        label_NameAPP.setForeground(new Color(255, 255, 255));
+        label_NameAPP.setHorizontalAlignment(SwingConstants.CENTER);
+        label_NameAPP.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+        label_NameAPP.setBounds(50, 310, 300, 50);
+        contentPane_Left.add(label_NameAPP);
+        contentPane_Left.revalidate();
+        contentPane_Left.repaint();
+        
+        
+	}
 }
