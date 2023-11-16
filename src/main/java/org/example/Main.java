@@ -1,6 +1,6 @@
 package org.example;
-import org.Model.SignUP;
-import org.Views.frameGUI;
+import org.Model.Login;
+//import org.Model.SignUP;
 
 import java.awt.EventQueue;
 
@@ -15,8 +15,13 @@ public class Main extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    SignUP frame = new SignUP();
-                    frame.setVisible(true);
+                    //SignUP frame = new SignUP();
+                    //frame.setVisible(true);
+                    
+                    
+                    Login loginFrame = new Login();
+            		loginFrame.setVisible(true);
+            		
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
