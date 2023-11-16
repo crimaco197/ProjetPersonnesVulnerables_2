@@ -8,6 +8,8 @@ public class DatabaseConnector {
 
     Connection connection;
 
+    //TODO: Handle exception when connections fails
+    //TODO: Handle exception when email already exists in database
     public DatabaseConnector() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,6 +40,22 @@ public class DatabaseConnector {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public int VerifyUserCredentials(User user)
+    {
+        try {
+            Statement statement = connection.createStatement();
+            String SQLQuery = String.format("SELECT * FROM Users WHERE Email = '%s' AND Password = '%s';", user.Email, user.Password);
+            ResultSet rs = statement.executeQuery(SQLQuery);
+            User loginUser = new User();
+            while (rs.next()) {
+                return rs.getInt("UserID");
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

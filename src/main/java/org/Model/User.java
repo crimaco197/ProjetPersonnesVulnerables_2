@@ -14,4 +14,7 @@ public class User {
         PhoneNumber = phoneNumber;
         Password = password;
     }
+
+    public User() {
+    }
 }
