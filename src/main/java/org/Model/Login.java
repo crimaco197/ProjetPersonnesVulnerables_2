@@ -57,18 +57,18 @@ public class Login extends JFrame {
         label_login.setBounds(150, 30, 100, 50);
         contentPane_Right.add(label_login);
         
-        JLabel email_1 = new JLabel("Email");
-        email_1.setBounds(80, 177, 78, 13);
-        contentPane_Right.add(email_1);
+        JLabel label_email = new JLabel("Email");
+        label_email.setBounds(80, 177, 78, 13);
+        contentPane_Right.add(label_email);
         
         email = new JTextField();
         email.setColumns(10);
         email.setBounds(80, 189, 267, 28);
         contentPane_Right.add(email);
         
-        JLabel password_1 = new JLabel("Password");
-        password_1.setBounds(80, 227, 78, 13);
-        contentPane_Right.add(password_1);
+        JLabel label_password = new JLabel("Password");
+        label_password.setBounds(80, 227, 78, 13);
+        contentPane_Right.add(label_password);
         
         password = new JTextField();
         password.setColumns(10);
