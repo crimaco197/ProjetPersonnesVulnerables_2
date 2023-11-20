@@ -66,36 +66,36 @@ public class SignUP extends JFrame {
         lastname.setBounds(80, 136, 267, 28);
         contentPane_Right.add(lastname);
         
-        JLabel lastname = new JLabel("LastName");
-        lastname.setBounds(80, 124, 78, 13);
-        contentPane_Right.add(lastname);
+        JLabel label_lastname = new JLabel("LastName");
+        label_lastname.setBounds(80, 124, 78, 13);
+        contentPane_Right.add(label_lastname);
         
         name = new JTextField();
         name.setColumns(10);
         name.setBounds(80, 186, 267, 28);
         contentPane_Right.add(name);
         
-        JLabel name = new JLabel("Name");
-        name.setBounds(80, 174, 78, 13);
-        contentPane_Right.add(name);
+        JLabel label_name = new JLabel("Name");
+        label_name.setBounds(80, 174, 78, 13);
+        contentPane_Right.add(label_name);
         
         phone = new JTextField();
         phone.setColumns(10);
         phone.setBounds(80, 236, 267, 28);
         contentPane_Right.add(phone);
         
-        JLabel phone = new JLabel("Phone");
-        phone.setBounds(80, 224, 78, 13);
-        contentPane_Right.add(phone);
+        JLabel label_phone = new JLabel("Phone");
+        label_phone.setBounds(80, 224, 78, 13);
+        contentPane_Right.add(label_phone);
         
         email = new JTextField();
         email.setColumns(10);
         email.setBounds(80, 286, 267, 28);
         contentPane_Right.add(email);
         
-        JLabel email = new JLabel("Email");
-        email.setBounds(80, 274, 78, 13);
-        contentPane_Right.add(email);
+        JLabel label_email = new JLabel("Email");
+        label_email.setBounds(80, 274, 78, 13);
+        contentPane_Right.add(label_email);
         
         //password = new JPasswordField();
         password = new JTextField();
@@ -103,9 +103,9 @@ public class SignUP extends JFrame {
         password.setBounds(80, 336, 267, 28);
         contentPane_Right.add(password);
         
-        JLabel password = new JLabel("Password");
-        password.setBounds(80, 324, 78, 13);
-        contentPane_Right.add(password);
+        JLabel label_password = new JLabel("Password");
+        label_password.setBounds(80, 324, 78, 13);
+        contentPane_Right.add(label_password);
         
         JLabel label_tologin = new JLabel("Have you already an account ?");
         label_tologin.setBounds(80, 376, 199, 16);
