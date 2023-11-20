@@ -98,7 +98,7 @@ public class SignUP extends JFrame {
         contentPane_Right.add(email);
         
         //password = new JPasswordField();
-        password = new JTextField("password");
+        password = new JTextField();
         password.setColumns(10);
         password.setBounds(80, 336, 267, 28);
         contentPane_Right.add(password);
