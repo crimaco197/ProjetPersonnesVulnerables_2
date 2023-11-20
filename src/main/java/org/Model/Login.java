@@ -91,7 +91,7 @@ public class Login extends JFrame {
         });
         
         btn_toSignUp.setForeground(new Color(0, 128, 128));
-        btn_toSignUp.setBackground(new Color(192, 192, 192));
+        btn_toSignUp.setBackground(Color.LIGHT_GRAY);
         btn_toSignUp.setBounds(270, 274, 80, 29);
         contentPane_Right.add(btn_toSignUp);
         
@@ -107,7 +107,7 @@ public class Login extends JFrame {
         	}
         });
         btn_Login.setForeground(new Color(0, 128, 128));
-        btn_Login.setBackground(new Color(0, 128, 128));
+        btn_Login.setBackground(Color.LIGHT_GRAY);
         btn_Login.setBounds(150, 330, 100, 40);
         contentPane_Right.add(btn_Login);
         

@@ -1,4 +1,4 @@
-package org.Model;
+/*package org.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,4 +48,5 @@ public class ImageFrame extends JFrame {
         });
     }
 }
+*/
 
