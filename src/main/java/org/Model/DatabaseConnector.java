@@ -46,13 +46,12 @@ public class DatabaseConnector {
     }
 
     // Verifies user and password in login, if password is correct returns the user ID otherwise returns 0
-    public int VerifyUserCredentials(User user)
+    public int VerifyUserCredentials(String email, String password)
     {
         try {
             Statement statement = connection.createStatement();
-            String SQLQuery = String.format("SELECT * FROM Users WHERE Email = '%s' AND Password = '%s';", user.Email, user.Password);
+            String SQLQuery = String.format("SELECT * FROM Users WHERE Email = '%s' AND Password = '%s';", email, password);
             ResultSet rs = statement.executeQuery(SQLQuery);
-            User loginUser = new User();
             while (rs.next()) {
                 return rs.getInt("UserID");
             }

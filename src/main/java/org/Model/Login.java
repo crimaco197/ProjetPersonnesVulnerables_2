@@ -99,11 +99,10 @@ public class Login extends JFrame {
         JButton btn_Login = new JButton("Login");
         btn_Login.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-			//	DatabaseConnector connexion = new DatabaseConnector();
-			//	User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText(), password.getText());
-			//	connexion.CreateUser(newUser);
+				DatabaseConnector connexion = new DatabaseConnector();
+				int userID = connexion.VerifyUserCredentials(email.getText(), password.getText());
         		
-        		System.out.println("You have login");
+        		System.out.println("You have login, user" + userID);
         	}
         });
         btn_Login.setForeground(new Color(0, 128, 128));
