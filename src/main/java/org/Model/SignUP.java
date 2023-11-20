@@ -97,7 +97,8 @@ public class SignUP extends JFrame {
         email.setBounds(80, 274, 78, 13);
         contentPane_Right.add(email);
         
-        password = new JTextField();
+        //password = new JPasswordField();
+        password = new JTextField("password");
         password.setColumns(10);
         password.setBounds(80, 336, 267, 28);
         contentPane_Right.add(password);
@@ -138,7 +139,7 @@ public class SignUP extends JFrame {
         	}
         });
         btn_SignUp.setForeground(new Color(0, 128, 128));
-        btn_SignUp.setBackground(new Color(0, 128, 128));
+        btn_SignUp.setBackground(Color.LIGHT_GRAY);
         btn_SignUp.setBounds(150, 415, 100, 40);
         contentPane_Right.add(btn_SignUp);
         

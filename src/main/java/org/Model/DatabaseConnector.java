@@ -10,6 +10,7 @@ public class DatabaseConnector {
 
     //TODO: Handle exception when connections fails
     //TODO: Handle exception when email already exists in database
+    //CONSTRUCTOR: Tries to make the database connection with the username and password
     public DatabaseConnector() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,6 +20,8 @@ public class DatabaseConnector {
         }
     }
 
+
+    // Add new user to Users table
     public boolean CreateUser(User user){
         try {
             Statement statement = connection.createStatement();
@@ -42,6 +45,7 @@ public class DatabaseConnector {
 
     }
 
+    // Verifies user and password in login, if password is correct returns the user ID otherwise returns 0
     public int VerifyUserCredentials(User user)
     {
         try {
