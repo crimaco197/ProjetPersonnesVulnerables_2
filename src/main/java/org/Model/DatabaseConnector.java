@@ -31,6 +31,16 @@ public class DatabaseConnector {
             throw new RuntimeException(e);
         }
     }
+    
+    public boolean CreateHelpRequest(Helprequest request){
+        try {
+            Statement statement = connection.createStatement();
+            String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Date ,ID,Needy,Volunteer) VALUES ('%s', '%s', '%s', %d ,%d ,%d);", request.Title, request.Description, request.Date , request.ID , request.Needy ,request.Volunter);
+            return statement.execute(SQLQuery1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     //Not tested yet 15/11/23
     public boolean UpdateUser(User user)
