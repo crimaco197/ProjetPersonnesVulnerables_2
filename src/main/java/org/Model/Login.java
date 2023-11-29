@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Login extends JFrame {
 
@@ -101,8 +102,19 @@ public class Login extends JFrame {
         	public void actionPerformed(ActionEvent e) {
 				DatabaseConnector connexion = new DatabaseConnector();
 				int userID = connexion.VerifyUserCredentials(email.getText(), password.getText());
+                                if(userID!=0){
+                                    VHelprequest reqFrame = new VHelprequest();
+                                    reqFrame.setVisible(true);
+        		             Login.this.dispose();
+                                     System.out.println("You have login, user" + userID);
+                                
+                                }else{
+                                    JOptionPane.showMessageDialog(contentPane , "Error of identification");
+                                    email.setText("");
+                                    password.setText("");
+                                }
         		
-        		System.out.println("You have login, user" + userID);
+        		
         	}
         });
         btn_Login.setForeground(new Color(0, 128, 128));

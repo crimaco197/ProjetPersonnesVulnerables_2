@@ -4,8 +4,13 @@
  */
 package org.Model;
 
+import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+
 
 /**
  *
@@ -28,6 +33,7 @@ public class VHelprequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtdate = new javax.swing.JTextPane();
@@ -39,10 +45,16 @@ public class VHelprequest extends javax.swing.JFrame {
         Valider = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtdescription = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtstatut = new javax.swing.JTextPane();
+        jLabel5 = new javax.swing.JLabel();
+        btnupdate = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        show_table_data = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 51, 51));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -80,6 +92,20 @@ public class VHelprequest extends javax.swing.JFrame {
         txtdescription.setRows(5);
         jScrollPane2.setViewportView(txtdescription);
 
+        txtstatut.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane4.setViewportView(txtstatut);
+
+        jLabel5.setText("Statut :");
+
+        btnupdate.setBackground(new java.awt.Color(0, 204, 0));
+        btnupdate.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        btnupdate.setText("Update");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,74 +118,108 @@ public class VHelprequest extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(214, 214, 214)
-                        .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81)
+                        .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txttitle, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txttitle, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txttitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(Valider)
+                    .addComponent(Valider)
+                    .addComponent(btnupdate))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTable1.setBackground(new java.awt.Color(153, 153, 153));
-        jTable1.setForeground(new java.awt.Color(153, 153, 153));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title", "Date", "Description"
+                "Title", "Date", "Description", "Statut"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
+
+        show_table_data.setBackground(new java.awt.Color(0, 204, 0));
+        show_table_data.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        show_table_data.setText("Show All Requests");
+        show_table_data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                show_table_dataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(show_table_data)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 72, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(show_table_data)
+                .addGap(0, 132, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,24 +231,112 @@ public class VHelprequest extends javax.swing.JFrame {
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
         // TODO add your handling code here:
-        if(txttitle.getText().equals("") || txtdescription.getText().equals("") || txtdate.getText().equals("")){
+        if(txttitle.getText().equals("") || txtdescription.getText().equals("") || txtdate.getText().equals("") || txtstatut.getText().equals("") ){
             JOptionPane.showMessageDialog(this , "enter all data");
         }else{
-            String data[]= {txttitle.getText(),txtdate.getText(), txtdescription.getText()};
+            String data[]= {txttitle.getText(),txtdate.getText(), txtdescription.getText(),txtstatut.getText()};
             DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
             tb1Model.addRow(data);
             
             JOptionPane.showMessageDialog(this , "add succesfuly");
+            
+            DatabaseConnector connexion = new DatabaseConnector();
+				Helprequest newRequest = new Helprequest (txttitle.getText(), txtdescription.getText(), txtdate.getText() , txtstatut.getText());
+				connexion.CreateHelpRequest(newRequest);
+        		System.out.println("You have signed up");
             txttitle.setText("");
             txtdescription.setText("");
             txtdate.setText("");
+            txtstatut.setText("");
         }
         
-        DatabaseConnector connexion = new DatabaseConnector();
-				Helprequest newRequest = new Helprequest (txttitle.getText(), txtdescription.getText(), txtdate.getText() , 6 ,5 ,7);
-				connexion.CreateHelpRequest(newRequest);
-        		System.out.println("You have signed up");
+        
     }//GEN-LAST:event_ValiderActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+        
+        String tbltitle = tb1Model.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        String tbldescription = tb1Model.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tbldate = tb1Model.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String tblstatut = tb1Model.getValueAt(jTable1.getSelectedRow(), 3).toString();
+        
+        txttitle.setText(tbltitle);
+        txtdescription.setText(tbldescription);
+        txtdate.setText(tbldate);
+        txtstatut.setText(tblstatut);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+        if(jTable1.getSelectedRowCount() == 1){
+            String title = txttitle.getText();
+            String description = txtdescription.getText();
+            String date = txtdate.getText();
+            String statut = txtstatut.getText();
+            DatabaseConnector connexion = new DatabaseConnector();
+         try {
+        Statement statement =  connexion.connection.createStatement();
+            String SQLQuery1 = String.format("UPDATE HelpRequests SET Statut = '%s' WHERE Title = '%s'", statut, title);
+            statement.execute(SQLQuery1);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+
+
+            
+            tb1Model.setValueAt(title, jTable1.getSelectedRow(), 0);
+            tb1Model.setValueAt(date, jTable1.getSelectedRow(), 1);
+            tb1Model.setValueAt(description, jTable1.getSelectedRow(), 2);
+            tb1Model.setValueAt(statut, jTable1.getSelectedRow(), 3);
+            
+            JOptionPane.showMessageDialog(this , "Update succesfuly");
+            txttitle.setText("");
+            txtdescription.setText("");
+            txtdate.setText("");
+            txtstatut.setText("");
+            
+        }else{
+            if(jTable1.getRowCount()==0){
+                JOptionPane.showMessageDialog(this , "Table is empty");
+            }else{
+                JOptionPane.showMessageDialog(this , "Please select Single Row for update");
+            }
+        }
+        
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void show_table_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_table_dataActionPerformed
+        // TODO add your handling code here:
+        DatabaseConnector connexion = new DatabaseConnector();
+        try {
+            Statement statement = connexion.connection.createStatement();
+            String sql =  "SELECT Title ,Date,Description,Statut FROM projet_gei_026.HelpRequests";
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while(rs.next()){
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String date = rs.getString("Date");
+                String statut = rs.getString("Statut");
+                
+               String tdData[] = {title ,date,description,statut};
+               DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+               
+               
+               //add string array data into jtable
+               tb1Model.addRow(tdData);
+            }
+            
+      
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        //
+    }//GEN-LAST:event_show_table_dataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,17 +345,23 @@ public class VHelprequest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Valider;
+    private javax.swing.JButton btnupdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton show_table_data;
     private javax.swing.JTextPane txtdate;
     private javax.swing.JTextArea txtdescription;
+    private javax.swing.JTextPane txtstatut;
     private javax.swing.JTextField txttitle;
     // End of variables declaration//GEN-END:variables
 }

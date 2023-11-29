@@ -15,9 +15,9 @@ public class Main extends JFrame {
             public void run() {
                 try {
                     
-                    VHelprequest requestframe= new VHelprequest();
-                      requestframe.setVisible(true);
-                      
+//                    VHelprequest requestframe= new VHelprequest();
+//                      requestframe.setVisible(true);
+//                      
                     Login loginFrame = new Login();
             		loginFrame.setVisible(true);
                         

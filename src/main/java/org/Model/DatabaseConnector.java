@@ -36,7 +36,7 @@ public class DatabaseConnector {
     public boolean CreateHelpRequest(Helprequest request){
         try {
             Statement statement = connection.createStatement();
-            String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Date ,ID,Needy,Volunteer) VALUES ('%s', '%s', '%s', %d ,%d ,%d);", request.Title, request.Description, request.Date , request.ID , request.Needy ,request.Volunter);
+            String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Date, Statut) VALUES ('%s', '%s', '%s' ,'%s');", request.Title, request.Description, request.Date ,request.Statut );
             return statement.execute(SQLQuery1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,32 +72,32 @@ public class DatabaseConnector {
         }
     }
     
-    public List<Helprequest> getAllRequests() {
-    List<Helprequest> requests = new ArrayList<>();
-
-    try {
-        Statement statement = connection.createStatement();
-        String SQLQuery = "SELECT * FROM Request";
-        ResultSet resultSet = statement.executeQuery(SQLQuery);
-
-        while (resultSet.next()) {
-            Helprequest request = new Helprequest(
-                resultSet.getString("Title"),
-                resultSet.getString("Description"),
-                resultSet.getString("Date"),
-                resultSet.getInt("ID"),
-                resultSet.getInt("Needy"),
-                resultSet.getInt("Volunteer")
-            );
-            requests.add(request);
-        }
-
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-
-    return requests;
-}
+//    public List<Helprequest> getAllRequests() {
+//    List<Helprequest> requests = new ArrayList<>();
+//
+//    try {
+//        Statement statement = connection.createStatement();
+//        String SQLQuery = "SELECT * FROM Request";
+//        ResultSet resultSet = statement.executeQuery(SQLQuery);
+//
+//        while (resultSet.next()) {
+//            Helprequest request = new Helprequest(
+//                resultSet.getString("Title"),
+//                resultSet.getString("Description"),
+//                resultSet.getString("Date"),
+//                resultSet.getInt("ID"),
+//                resultSet.getInt("Needy"),
+//                resultSet.getInt("Volunteer")
+//            );
+//            requests.add(request);
+//        }
+//
+//    } catch (SQLException e) {
+//        throw new RuntimeException(e);
+//    }
+//
+//    return requests;
+//}
 
 
 }

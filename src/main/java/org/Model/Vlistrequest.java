@@ -73,7 +73,7 @@ public class Vlistrequest extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nom", "Prenom"
+                "Nom", "Titre", "Etat", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

@@ -14,17 +14,19 @@ public class Helprequest {
     String Title;
     String Description;
     String Date ;
-    int ID ;
-    int Needy ;
-    int Volunter ;
+    String Statut ;
+//    int ID ;
+//    int Needy ;
+//    int Volunter ;
 
-    public Helprequest(String title, String description, String date , int id , int needy , int volunter) {
+    public Helprequest(String title, String description, String date ,String statut ) {
         Title = title;
         Description = description;
         Date = date;
-        ID =id ;
-        Needy = needy ;
-        Volunter = volunter ;
+        Statut = statut ;
+//        ID =id ;
+//        Needy = needy ;
+//        Volunter = volunter ;
         
         
     }

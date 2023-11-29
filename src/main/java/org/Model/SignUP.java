@@ -135,6 +135,9 @@ public class SignUP extends JFrame {
 				DatabaseConnector connexion = new DatabaseConnector();
 				User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText(), password.getText());
 				connexion.CreateUser(newUser);
+                                VHelprequest reqFrame = new VHelprequest();
+                                    reqFrame.setVisible(true);
+        		             SignUP.this.dispose();
         		System.out.println("You have signed up");
         	}
         });
