@@ -1,5 +1,6 @@
 package org.Model;
 import java.sql.*;
+import java.util.*;
 public class DatabaseConnector {
     private String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_026";
     private String username = "projet_gei_026";
@@ -47,7 +48,7 @@ public class DatabaseConnector {
     {
         try {
             Statement statement = connection.createStatement();
-            String SQLQuery = String.format("UPDATE Users SET FirstName = '%s', LastName = '%s', Email = '%s', PhoneNumber = '%s', Password = '%s' WHERE userID = %i;",  user.FirstName, user.LastName, user.Email, user.PhoneNumber, user.Password, user.userID);
+            String SQLQuery = String.format("UPDATE Users SET FirstName = '%s', LastName = '%s', Email = '%s', PhoneNumber = '%s', Password = '%s' WHERE userID = %d;",  user.FirstName, user.LastName, user.Email, user.PhoneNumber, user.Password, user.userID);
             return statement.execute(SQLQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,5 +71,33 @@ public class DatabaseConnector {
             throw new RuntimeException(e);
         }
     }
+    
+    public List<Helprequest> getAllRequests() {
+    List<Helprequest> requests = new ArrayList<>();
+
+    try {
+        Statement statement = connection.createStatement();
+        String SQLQuery = "SELECT * FROM Request";
+        ResultSet resultSet = statement.executeQuery(SQLQuery);
+
+        while (resultSet.next()) {
+            Helprequest request = new Helprequest(
+                resultSet.getString("Title"),
+                resultSet.getString("Description"),
+                resultSet.getString("Date"),
+                resultSet.getInt("ID"),
+                resultSet.getInt("Needy"),
+                resultSet.getInt("Volunteer")
+            );
+            requests.add(request);
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+
+    return requests;
+}
+
 
 }
