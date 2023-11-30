@@ -4,10 +4,6 @@
  */
 package org.Model;
 
-/**
- *
- * @author hp
- */
 public class Helprequest {
     
     
