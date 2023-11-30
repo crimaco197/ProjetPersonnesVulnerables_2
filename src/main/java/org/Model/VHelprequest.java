@@ -271,6 +271,7 @@ public class VHelprequest extends javax.swing.JFrame {
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+        
         if(jTable1.getSelectedRowCount() == 1){
             String title = txttitle.getText();
             String description = txtdescription.getText();
@@ -287,9 +288,9 @@ public class VHelprequest extends javax.swing.JFrame {
 
 
             
-            tb1Model.setValueAt(title, jTable1.getSelectedRow(), 0);
-            tb1Model.setValueAt(date, jTable1.getSelectedRow(), 1);
-            tb1Model.setValueAt(description, jTable1.getSelectedRow(), 2);
+//            tb1Model.setValueAt(title, jTable1.getSelectedRow(), 0);
+//            tb1Model.setValueAt(date, jTable1.getSelectedRow(), 1);
+//            tb1Model.setValueAt(description, jTable1.getSelectedRow(), 2);
             tb1Model.setValueAt(statut, jTable1.getSelectedRow(), 3);
             
             JOptionPane.showMessageDialog(this , "Update succesfuly");
@@ -311,6 +312,9 @@ public class VHelprequest extends javax.swing.JFrame {
     private void show_table_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_table_dataActionPerformed
         // TODO add your handling code here:
         DatabaseConnector connexion = new DatabaseConnector();
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+        // Vider la table avant d'exécuter la mise à jour
+         tb1Model.setRowCount(0);
         try {
             Statement statement = connexion.connection.createStatement();
             String sql =  "SELECT Title ,Date,Description,Statut FROM projet_gei_026.HelpRequests";
@@ -323,7 +327,7 @@ public class VHelprequest extends javax.swing.JFrame {
                 String statut = rs.getString("Statut");
                 
                String tdData[] = {title ,date,description,statut};
-               DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
+//               DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
                
                
                //add string array data into jtable
