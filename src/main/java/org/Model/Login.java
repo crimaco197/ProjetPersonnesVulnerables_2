@@ -5,22 +5,15 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
     private JTextField email;
-    private JTextField password;
+    private JPasswordField passwordField;
 
 
 	
@@ -70,11 +63,11 @@ public class Login extends JFrame {
         JLabel label_password = new JLabel("Password");
         label_password.setBounds(80, 227, 78, 13);
         contentPane_Right.add(label_password);
-        
-        password = new JTextField();
-        password.setColumns(10);
-        password.setBounds(80, 239, 267, 28);
-        contentPane_Right.add(password);
+
+        passwordField = new JPasswordField();
+        passwordField.setColumns(10);
+        passwordField.setBounds(80, 239, 267, 28);
+        contentPane_Right.add(passwordField);
         
         JLabel label_toSIGNUP = new JLabel("Create an account ?");
         label_toSIGNUP.setBounds(80, 279, 199, 16);
@@ -99,23 +92,32 @@ public class Login extends JFrame {
         //BUTTON LOGIN
         JButton btn_Login = new JButton("Login");
         btn_Login.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-				DatabaseConnector connexion = new DatabaseConnector();
-				int userID = connexion.VerifyUserCredentials(email.getText(), password.getText());
-                                if(userID!=0){
-                                    VHelprequest reqFrame = new VHelprequest();
-                                    reqFrame.setVisible(true);
-        		             Login.this.dispose();
-                                     System.out.println("You have login, user" + userID);
-                                
-                                }else{
-                                    JOptionPane.showMessageDialog(contentPane , "Error of identification");
-                                    email.setText("");
-                                    password.setText("");
-                                }
-        		
-        		
-        	}
+            public void actionPerformed(ActionEvent e) {
+                char[] password = passwordField.getPassword();
+                String passwordString = new String(password);
+
+                if (
+                        email.getText().trim().isEmpty() ||
+                        passwordString.trim().isEmpty()) {
+                    // Muestra un mensaje de error
+                    JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Todos los campos están llenos, procede con el login
+                    DatabaseConnector connexion = new DatabaseConnector();
+                    int userID = connexion.VerifyUserCredentials(email.getText(), passwordString);
+                    if(userID!=0){
+                        VHelprequest reqFrame = new VHelprequest();
+                        reqFrame.setVisible(true);
+                        Login.this.dispose();
+                        System.out.println("You have login, user" + userID);
+
+                    }else{
+                        JOptionPane.showMessageDialog(Login.this, "Incorrect email or password. Please try again.", "Identification Error", JOptionPane.ERROR_MESSAGE);
+                        email.setText("");
+                        passwordField.setText("");
+                    }
+                }
+            }
         });
         btn_Login.setForeground(new Color(0, 128, 128));
         btn_Login.setBackground(Color.LIGHT_GRAY);

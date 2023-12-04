@@ -23,8 +23,6 @@ public class Main extends JFrame {
                         
 //                    Vlistrequest hi = new Vlistrequest();
 //                       hi.setVisible(true);
-                
-            		
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
