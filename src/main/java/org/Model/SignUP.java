@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class SignUP extends JFrame {
 
@@ -98,7 +99,7 @@ public class SignUP extends JFrame {
         contentPane_Right.add(label_email);
         
         //password = new JPasswordField();
-        password = new JTextField();
+        password = new JPasswordField(20);
         password.setColumns(10);
         password.setBounds(80, 336, 267, 28);
         contentPane_Right.add(password);
