@@ -2,14 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.Model;
+package org.Views;
 
-import java.sql.*;
+import org.Controller.DatabaseController;
+import org.Controller.HelpRequestController;
+import org.Model.Helprequest;
+
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTable;
 
 
 /**
@@ -249,10 +252,10 @@ public class VHelprequest extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this , "add succesfuly");
             
-            DatabaseConnector connexion = new DatabaseConnector();
-				Helprequest newRequest = new Helprequest (txttitle.getText(), txtdescription.getText(), txtdate.getText() , txtstatut.getText());
-				connexion.CreateHelpRequest(newRequest);
-        		System.out.println("You have signed up");
+            HelpRequestController connexion = new HelpRequestController();
+            Helprequest newRequest = new Helprequest (txttitle.getText(), txtdescription.getText(), new Date(), txtstatut.getText());
+			connexion.CreateHelpRequest(newRequest);
+        	System.out.println("You have signed up");
             txttitle.setText("");
             txtdescription.setText("");
             txtdate.setText("");
@@ -284,13 +287,11 @@ public class VHelprequest extends javax.swing.JFrame {
         if(jTable1.getSelectedRowCount() == 1){
             String title = txttitle.getText();
             String description = txtdescription.getText();
-            String date = txtdate.getText();
+            //Date date = txtdate.getText();
             String statut = txtstatut.getText();
-            DatabaseConnector connexion = new DatabaseConnector();
+            HelpRequestController connexion = new HelpRequestController();
          try {
-        Statement statement =  connexion.connection.createStatement();
-            String SQLQuery1 = String.format("UPDATE HelpRequests SET Statut = '%s' WHERE Title = '%s'", statut, title);
-            statement.execute(SQLQuery1);
+            connexion.UpdateHelpRequest(statut, title);
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
@@ -320,32 +321,15 @@ public class VHelprequest extends javax.swing.JFrame {
 
     private void show_table_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_table_dataActionPerformed
         // TODO add your handling code here:
-        DatabaseConnector connexion = new DatabaseConnector();
+        HelpRequestController connexion = new HelpRequestController();
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         // Vider la table avant d'exécuter la mise à jour
-         tb1Model.setRowCount(0);
-        try {
-            Statement statement = connexion.connection.createStatement();
-            String sql =  "SELECT Title ,Date,Description,Statut FROM projet_gei_026.HelpRequests";
-            ResultSet rs = statement.executeQuery(sql);
-            
-            while(rs.next()){
-                String title = rs.getString("Title");
-                String description = rs.getString("Description");
-                String date = rs.getString("Date");
-                String statut = rs.getString("Statut");
-                
-               String tdData[] = {title ,date,description,statut};
-//               DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
-               
-               
-               //add string array data into jtable
-               tb1Model.addRow(tdData);
-            }
-            
-      
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        tb1Model.setRowCount(0);
+        List<Helprequest> helprequestList = connexion.getAllRequests();
+
+        for (Helprequest hr : helprequestList) {
+            String tdData[] = {hr.getTitle(), hr.getDate().toString() ,hr.getDescription(),hr.getStatus()};
+            tb1Model.addRow(tdData);
         }
         
         //

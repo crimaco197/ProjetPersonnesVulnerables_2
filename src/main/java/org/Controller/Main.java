@@ -1,6 +1,6 @@
-package org.example;
-import org.Model.*;
-//import org.Model.SignUP;
+package org.Controller;
+import org.Views.Login;
+//import org.Views.SignUP;
 
 import java.awt.EventQueue;
 
@@ -23,8 +23,6 @@ public class Main extends JFrame {
                         
 //                    Vlistrequest hi = new Vlistrequest();
 //                       hi.setVisible(true);
-                
-            		
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,4 +1,8 @@
-package org.Model;
+package org.Views;
+
+import org.Controller.DatabaseController;
+import org.Controller.UserController;
+import org.Model.User;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -145,9 +149,9 @@ public class SignUP extends JFrame {
                     JOptionPane.showMessageDialog(SignUP.this, "All fields must be filled out.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Todos los campos están llenos, procede con el registro
-                    DatabaseConnector connexion = new DatabaseConnector();
-                    User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText(), passwordString);
-                    connexion.CreateUser(newUser);
+                    UserController connexion = new UserController();
+                    User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText());
+                    connexion.CreateUser(newUser,passwordString);
                     VHelprequest reqFrame = new VHelprequest();
                     reqFrame.setVisible(true);
                     SignUP.this.dispose();
