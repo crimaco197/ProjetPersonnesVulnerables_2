@@ -1,4 +1,7 @@
-package org.Model;
+package org.Views;
+
+import org.Controller.DatabaseController;
+import org.Controller.UserController;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -103,7 +106,7 @@ public class Login extends JFrame {
                     JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Todos los campos están llenos, procede con el login
-                    DatabaseConnector connexion = new DatabaseConnector();
+                    UserController connexion = new UserController();
                     int userID = connexion.VerifyUserCredentials(email.getText(), passwordString);
                     if(userID!=0){
                         VHelprequest reqFrame = new VHelprequest();
