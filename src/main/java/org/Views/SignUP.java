@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+;
 
 
 
@@ -148,6 +149,7 @@ public class SignUP extends JFrame {
 
                     // Muestra un mensaje de error
                     JOptionPane.showMessageDialog(SignUP.this, "All fields must be filled out.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("All fields must be filled out.");
                 } else {
                     // Todos los campos están llenos, procede con el registro
                     UserController connexion = new UserController();
@@ -197,6 +199,9 @@ public class SignUP extends JFrame {
     }
     public JTextField getLastName() {
         return lastname;
+    }
+    public JTextField getFirstname() {
+        return Firstname;
     }
     public JTextField getEmail() {
         return email;
