@@ -7,14 +7,28 @@ public class Helprequest {
     private String Description;
     private Date Date ;
     private String Status;
-//    int Needy ;
-//    int Volunter ;
+    private int RequestBy ;
+    private int Volunteer ;
 
     public Helprequest(String title, String description, Date date, String status ) {
         Title = title;
         Description = description;
         Date = date;
         Status = status;
+    }
+
+    public Helprequest(int ID, String title, String description, java.util.Date date, String status, int requestBy, int volunteer) {
+        this.ID = ID;
+        Title = title;
+        Description = description;
+        Date = date;
+        Status = status;
+        RequestBy = requestBy;
+        Volunteer = volunteer;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getID() {
@@ -43,5 +57,37 @@ public class Helprequest {
 
     public String getStatus() {
         return Status;
+    }
+
+    public int getRequestBy() {
+        return RequestBy;
+    }
+
+    public int getVolunteer() {
+        return Volunteer;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public void setDate(java.util.Date date) {
+        Date = date;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public void setRequestBy(int requestBy) {
+        RequestBy = requestBy;
+    }
+
+    public void setVolunteer(int volunteer) {
+        Volunteer = volunteer;
     }
 }
