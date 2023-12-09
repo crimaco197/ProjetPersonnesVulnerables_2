@@ -20,6 +20,7 @@ public class Login extends JFrame {
     private String errorMessage;
     private boolean loginSuccessful;
     private boolean signUpButtonClicked;
+    private JOptionPane errorOptionPane;
 
     JButton btn_Login;
     JButton btn_toSignUp;
@@ -29,16 +30,24 @@ public class Login extends JFrame {
     public Login() {
 		initComponents();
 		setVisible(true);
+        errorOptionPane = new JOptionPane();
 	}
 
     public String getErrorMessage() {
         return errorMessage;
     }
+    public void setErrorOptionPane(JOptionPane errorOptionPane) {
+        this.errorOptionPane = errorOptionPane;
+    }
+
 
     public boolean isLoginSuccessful() {
         return loginSuccessful;
     }
 
+    public boolean isErrorDialogClosed() {
+        return true; // Pour l'exemple, renvoie toujours vrai
+    }
     public boolean isSignUpButtonClicked() {
         return signUpButtonClicked;
     }
