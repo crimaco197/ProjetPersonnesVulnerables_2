@@ -1,5 +1,6 @@
 package org.Views;
 
+import org.Controller.CustomDialog;
 import org.Controller.DatabaseController;
 import org.Controller.UserController;
 
@@ -130,7 +131,8 @@ public class Login extends JFrame {
                         passwordString.trim().isEmpty()) {
                     // Muestra un mensaje de error
                     errorMessage = "All fields must be filled out.";
-                    errorOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    new CustomDialog("All fields must be filled out.", "Login Error", 3);
+
                 } else {
                     // Todos los campos están llenos, procede con el login
 
@@ -151,7 +153,8 @@ public class Login extends JFrame {
 
                     }else{
                         errorMessage = "Incorrect email or password. Please try again.";
-                        JOptionPane.showMessageDialog(Login.this, "Incorrect email or password. Please try again.", "Identification Error", JOptionPane.ERROR_MESSAGE);
+                        new CustomDialog("Incorrect email or password. Please try again.", "Identification Error", 3);
+
                         email.setText("");
                         passwordField.setText("");
                     }
@@ -204,8 +207,8 @@ public class Login extends JFrame {
     public JButton getButlogin() {
         return btn_Login;
     }
-    public JOptionPane getPane() {
-        return errorOptionPane;
+    public String getRrromsg() {
+        return errorMessage;
     }
 
     public JButton getButsignup() {

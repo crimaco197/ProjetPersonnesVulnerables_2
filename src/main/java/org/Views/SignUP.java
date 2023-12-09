@@ -32,8 +32,10 @@ public class SignUP extends JFrame {
     private JTextField email;
     private JTextField password;
     private JPasswordField passwordField;
-    JButton btn_SignUp;
-    String messi ;
+    private JButton btn_SignUp;
+    private JButton btn_toLogin ;
+    private String messi ;
+    private boolean loginButtonClicked = false ;
 
     public SignUP() {
         initComponents();
@@ -125,12 +127,13 @@ public class SignUP extends JFrame {
 
 
         //BUTTON TO LOGIN
-        JButton btn_toLogin = new JButton("Login");
+         btn_toLogin = new JButton("Login");
         btn_toLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Login loginFrame = new Login();
                 loginFrame.setVisible(true);
                 SignUP.this.dispose();
+                loginButtonClicked = true ;
                 System.out.println("You have change To Login");
             }
         });
@@ -228,7 +231,13 @@ public class SignUP extends JFrame {
     public JButton getButsign() {
         return btn_SignUp;
     }
+    public JButton getButlogin() {
+        return btn_toLogin;
+    }
     public String getMessi(){ return messi ; }
+    public boolean isSignUpButtonClicked() {
+        return loginButtonClicked;
+    }
 
 
 
