@@ -11,12 +11,12 @@ import org.Model.Helprequest;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Date;
-import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 /**
+ *
  * @author hp
  */
 public class VHelprequest extends javax.swing.JFrame {
@@ -186,10 +186,10 @@ public class VHelprequest extends javax.swing.JFrame {
 
         jTable1.setBackground(new java.awt.Color(153, 153, 153));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+                new Object [][] {
 
                 },
-                new String[]{
+                new String [] {
                         "Title", "Date", "Description", "Statut"
                 }
         ));
@@ -231,26 +231,12 @@ public class VHelprequest extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(176, 176, 176)
-                                                .addComponent(show_table_data)))
+                                                .addGap(63, 63, 63)
+                                                .addComponent(show_table_data)
+                                                .addGap(91, 91, 91)
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
-                                        .addComponent(show_table_data)
-                                        .addGap(91, 91, 91)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -275,17 +261,17 @@ public class VHelprequest extends javax.swing.JFrame {
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_ValiderActionPerformed
         // TODO add your handling code here:
-        if (txttitle.getText().equals("") || txtdescription.getText().equals("") || txtdate.getText().equals("") || txtstatut.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "enter all data");
-        } else {
-            String data[] = {txttitle.getText(), txtdate.getText(), txtdescription.getText(), txtstatut.getText()};
-            DefaultTableModel tb1Model = (DefaultTableModel) jTable1.getModel();
+        if(txttitle.getText().equals("") || txtdescription.getText().equals("") || txtdate.getText().equals("") || txtstatut.getText().equals("") ){
+            JOptionPane.showMessageDialog(this , "enter all data");
+        }else{
+            String data[]= {txttitle.getText(),txtdate.getText(), txtdescription.getText(),txtstatut.getText()};
+            DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
             tb1Model.addRow(data);
 
-            JOptionPane.showMessageDialog(this, "add succesfuly");
+            JOptionPane.showMessageDialog(this , "add succesfuly");
 
             HelpRequestController connexion = new HelpRequestController();
-            Helprequest newRequest = new Helprequest(txttitle.getText(), txtdescription.getText(), new Date(), txtstatut.getText());
+            Helprequest newRequest = new Helprequest (txttitle.getText(), txtdescription.getText(), new Date(), txtstatut.getText());
             connexion.CreateHelpRequest(newRequest);
             System.out.println("You have signed up");
             txttitle.setText("");
@@ -299,11 +285,11 @@ public class VHelprequest extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
 
         String tbltitle = tb1Model.getValueAt(jTable1.getSelectedRow(), 0).toString();
-        String tbldate = tb1Model.getValueAt(jTable1.getSelectedRow(), 1).toString();
-        String tbldescription = tb1Model.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String tbldescription = tb1Model.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tbldate = tb1Model.getValueAt(jTable1.getSelectedRow(), 2).toString();
         String tblstatut = tb1Model.getValueAt(jTable1.getSelectedRow(), 3).toString();
 
         txttitle.setText(tbltitle);
@@ -314,9 +300,9 @@ public class VHelprequest extends javax.swing.JFrame {
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_btnupdateActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
 
-        if (jTable1.getSelectedRowCount() == 1) {
+        if(jTable1.getSelectedRowCount() == 1){
             String title = txttitle.getText();
             String description = txtdescription.getText();
             //Date date = txtdate.getText();
@@ -329,22 +315,23 @@ public class VHelprequest extends javax.swing.JFrame {
             }
 
 
+
 //            tb1Model.setValueAt(title, jTable1.getSelectedRow(), 0);
 //            tb1Model.setValueAt(date, jTable1.getSelectedRow(), 1);
 //            tb1Model.setValueAt(description, jTable1.getSelectedRow(), 2);
             tb1Model.setValueAt(statut, jTable1.getSelectedRow(), 3);
 
-            JOptionPane.showMessageDialog(this, "Update succesfuly");
+            JOptionPane.showMessageDialog(this , "Update succesfuly");
             txttitle.setText("");
             txtdescription.setText("");
             txtdate.setText("");
             txtstatut.setText("");
 
-        } else {
-            if (jTable1.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "Table is empty");
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select Single Row for update");
+        }else{
+            if(jTable1.getRowCount()==0){
+                JOptionPane.showMessageDialog(this , "Table is empty");
+            }else{
+                JOptionPane.showMessageDialog(this , "Please select Single Row for update");
             }
         }
 
@@ -353,16 +340,15 @@ public class VHelprequest extends javax.swing.JFrame {
     private void show_table_dataActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_show_table_dataActionPerformed
         // TODO add your handling code here:
         HelpRequestController connexion = new HelpRequestController();
-        DefaultTableModel tb1Model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         // Vider la table avant d'exécuter la mise à jour
         tb1Model.setRowCount(0);
         List<Helprequest> helprequestList = connexion.getAllRequests();
 
         for (Helprequest hr : helprequestList) {
-            String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getDate().toString(), hr.getDescription(), hr.getStatus()};
+            String tdData[] = {hr.getTitle(), hr.getDate().toString() ,hr.getDescription(),hr.getStatus()};
             tb1Model.addRow(tdData);
         }
-
 
         //
     }//GEN-LAST:event_show_table_dataActionPerformed
