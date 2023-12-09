@@ -13,16 +13,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+;
+
+
+
 public class SignUP extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField lastname;
-    private JTextField name;
+    private JTextField Firstname;
     private JTextField phone;
     private JTextField email;
     private JTextField password;
     private JPasswordField passwordField;
+    JButton btn_SignUp;
 
     public SignUP() {
         initComponents();
@@ -62,12 +71,12 @@ public class SignUP extends JFrame {
         label_lastname.setBounds(80, 124, 78, 13);
         contentPane_Right.add(label_lastname);
 
-        name = new JTextField();
-        name.setColumns(10);
-        name.setBounds(80, 186, 267, 28);
-        contentPane_Right.add(name);
+        Firstname = new JTextField();
+        Firstname.setColumns(10);
+        Firstname.setBounds(80, 186, 267, 28);
+        contentPane_Right.add(Firstname);
 
-        JLabel label_name = new JLabel("Name");
+        JLabel label_name = new JLabel("Firstname");
         label_name.setBounds(80, 174, 78, 13);
         contentPane_Right.add(label_name);
 
@@ -90,10 +99,11 @@ public class SignUP extends JFrame {
         contentPane_Right.add(label_email);
 
         //password = new JPasswordField();
-        //  password = new JTextField();
-        //  password.setColumns(10);
-        //  password.setBounds(80, 336, 267, 28);
-        //  contentPane_Right.add(password);
+        password = new JPasswordField(20);
+        password.setColumns(10);
+        password.setBounds(80, 336, 267, 28);
+        contentPane_Right.add(password);
+        
 
         JLabel label_password = new JLabel("Password");
         label_password.setBounds(80, 324, 78, 13);
@@ -128,18 +138,19 @@ public class SignUP extends JFrame {
         contentPane_Right.add(btn_toLogin);
 
         //BUTTON SIGN UP
-        JButton btn_SignUp = new JButton("Sign Up");
+         btn_SignUp = new JButton("Sign Up");
         btn_SignUp.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 char[] password = passwordField.getPassword();
                 String passwordString = new String(password);
 
-                if (name.getText().trim().isEmpty() || lastname.getText().trim().isEmpty() ||
+                if (Firstname.getText().trim().isEmpty() || lastname.getText().trim().isEmpty() ||
                         email.getText().trim().isEmpty() || phone.getText().trim().isEmpty() ||
                         passwordString.trim().isEmpty()) {
 
                     // Muestra un mensaje de error
                     JOptionPane.showMessageDialog(SignUP.this, "All fields must be filled out.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("All fields must be filled out.");
                 } else {
                     // Todos los campos están llenos, procede con el registro
                     UserController connexion = null;
@@ -150,7 +161,8 @@ public class SignUP extends JFrame {
                     } catch (ClassNotFoundException ex) { // ClassNot..Exc: could not find driver to connect to database -> caused by not adding dependencie in pom.xml
                         throw new RuntimeException(ex);
                     }
-                    User newUser = new User(name.getText(), lastname.getText(), email.getText(), phone.getText());
+
+                    User newUser = new User(Firstname.getText(), lastname.getText(), email.getText(), phone.getText());
                     connexion.CreateUser(newUser,passwordString);
                     VHelprequest reqFrame = new VHelprequest();
                     reqFrame.setVisible(true);
@@ -194,5 +206,25 @@ public class SignUP extends JFrame {
         contentPane_Left.repaint();
 
     }
+    public JTextField getLastName() {
+        return lastname;
+    }
+    public JTextField getFirstname() {
+        return Firstname;
+    }
+    public JTextField getEmail() {
+        return email;
+    }
+    public JTextField getPassword() {
+        return password;
+    }
+    public JTextField getPhone() {
+        return phone;
+    }
+    public JButton getButsign() {
+        return btn_SignUp;
+    }
+
+
 
 }

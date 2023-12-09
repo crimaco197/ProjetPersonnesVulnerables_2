@@ -18,14 +18,31 @@ public class Login extends JFrame {
 	private JPanel contentPane;
     private JTextField email;
     private JPasswordField passwordField;
+    private String errorMessage;
+    private boolean loginSuccessful;
+    private boolean signUpButtonClicked;
+
+    JButton btn_Login;
+    JButton btn_toSignUp;
 
 
-	
-	public Login() {
+
+    public Login() {
 		initComponents();
 		setVisible(true);
 	}
-	
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public boolean isLoginSuccessful() {
+        return loginSuccessful;
+    }
+
+    public boolean isSignUpButtonClicked() {
+        return signUpButtonClicked;
+    }
 	
 	/**
 	 * Create the frame.
@@ -78,11 +95,12 @@ public class Login extends JFrame {
         contentPane_Right.add(label_toSIGNUP);
         
         //BUTTON TO SIGNUP
-        JButton btn_toSignUp = new JButton("Sign Up");
+         btn_toSignUp = new JButton("Sign Up");
         btn_toSignUp.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		SignUP signupFrame = new SignUP();
         		signupFrame.setVisible(true);
+                signUpButtonClicked = true;
         		Login.this.dispose();
         		System.out.println("you have change To Sign Up");
         	}
@@ -94,7 +112,7 @@ public class Login extends JFrame {
         contentPane_Right.add(btn_toSignUp);
         
         //BUTTON LOGIN
-        JButton btn_Login = new JButton("Login");
+         btn_Login = new JButton("Login");
         btn_Login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 char[] password = passwordField.getPassword();
@@ -104,6 +122,7 @@ public class Login extends JFrame {
                         email.getText().trim().isEmpty() ||
                         passwordString.trim().isEmpty()) {
                     // Muestra un mensaje de error
+                    errorMessage = "All fields must be filled out.";
                     JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Todos los campos están llenos, procede con el login
@@ -118,10 +137,13 @@ public class Login extends JFrame {
                     if(userID!=0){
                         VHelprequest reqFrame = new VHelprequest();
                         reqFrame.setVisible(true);
+                        loginSuccessful = true;
+
                         Login.this.dispose();
                         System.out.println("You have login, user" + userID);
 
                     }else{
+                        errorMessage = "Incorrect email or password. Please try again.";
                         JOptionPane.showMessageDialog(Login.this, "Incorrect email or password. Please try again.", "Identification Error", JOptionPane.ERROR_MESSAGE);
                         email.setText("");
                         passwordField.setText("");
@@ -166,4 +188,18 @@ public class Login extends JFrame {
         
         
 	}
+    public JTextField getEmail() {
+        return email;
+    }
+    public JTextField getPasswordfield() {
+        return passwordField;
+    }
+    public JButton getButlogin() {
+        return btn_Login;
+    }
+
+    public JButton getButsignup() {
+        return btn_toSignUp;
+    }
+
 }
