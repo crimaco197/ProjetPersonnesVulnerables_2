@@ -3,6 +3,7 @@ package org.Views;
 import org.Controller.DatabaseController;
 import org.Controller.UserController;
 import org.Model.User;
+import org.Controller.CustomDialog;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -32,6 +33,7 @@ public class SignUP extends JFrame {
     private JTextField password;
     private JPasswordField passwordField;
     JButton btn_SignUp;
+    String messi ;
 
     public SignUP() {
         initComponents();
@@ -149,7 +151,8 @@ public class SignUP extends JFrame {
                         passwordString.trim().isEmpty()) {
 
                     // Muestra un mensaje de error
-                    JOptionPane.showMessageDialog(SignUP.this, "All fields must be filled out.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                    new CustomDialog("All fields must be filled out.", "Sign Up Error", 3);
+                    messi = "All fields must be filled out.";
                     System.out.println("All fields must be filled out.");
                 } else {
                     // Todos los campos están llenos, procede con el registro
@@ -167,6 +170,7 @@ public class SignUP extends JFrame {
                     VHelprequest reqFrame = new VHelprequest();
                     reqFrame.setVisible(true);
                     SignUP.this.dispose();
+                    messi = "You have signed up";
                     System.out.println("You have signed up");
                 }
             }
@@ -216,7 +220,7 @@ public class SignUP extends JFrame {
         return email;
     }
     public JTextField getPassword() {
-        return password;
+        return passwordField;
     }
     public JTextField getPhone() {
         return phone;
@@ -224,6 +228,7 @@ public class SignUP extends JFrame {
     public JButton getButsign() {
         return btn_SignUp;
     }
+    public String getMessi(){ return messi ; }
 
 
 

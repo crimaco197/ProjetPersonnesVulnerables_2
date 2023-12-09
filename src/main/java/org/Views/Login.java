@@ -49,9 +49,7 @@ public class Login extends JFrame {
     public boolean isErrorDialogClosed() {
         return true; // Pour l'exemple, renvoie toujours vrai
     }
-    public boolean isSignUpButtonClicked() {
-        return signUpButtonClicked;
-    }
+
 	
 	/**
 	 * Create the frame.
@@ -132,7 +130,7 @@ public class Login extends JFrame {
                         passwordString.trim().isEmpty()) {
                     // Muestra un mensaje de error
                     errorMessage = "All fields must be filled out.";
-                    JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    errorOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Todos los campos están llenos, procede con el login
 
@@ -206,9 +204,15 @@ public class Login extends JFrame {
     public JButton getButlogin() {
         return btn_Login;
     }
+    public JOptionPane getPane() {
+        return errorOptionPane;
+    }
 
     public JButton getButsignup() {
         return btn_toSignUp;
+    }
+    public boolean isSignUpButtonClicked() {
+        return signUpButtonClicked;
     }
 
 }
