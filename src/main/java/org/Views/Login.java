@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -134,7 +135,13 @@ public class Login extends JFrame {
                     JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Todos los campos están llenos, procede con el login
-                    UserController connexion = new UserController();
+
+                    UserController connexion = null;
+                    try {
+                        connexion = new UserController();
+                    } catch (Exception ex) {
+                        //mensaje de error: error conectandose a la base de datos;
+                    }
                     int userID = connexion.VerifyUserCredentials(email.getText(), passwordString);
                     if(userID!=0){
                         VHelprequest reqFrame = new VHelprequest();

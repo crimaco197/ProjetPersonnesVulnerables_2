@@ -18,13 +18,11 @@ public class DatabaseController {
     //TODO: Handle exception when connections fails
     //TODO: Handle exception when email already exists in database
     //CONSTRUCTOR: Tries to make the database connection with the username and password
-    public DatabaseController() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public DatabaseController() throws SQLException, ClassNotFoundException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        connection = DriverManager.getConnection(url,username,password);
+
     }
 
 

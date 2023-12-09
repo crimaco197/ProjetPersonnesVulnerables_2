@@ -1,12 +1,14 @@
 package org.Controller;
 
 import org.Model.User;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserController extends DatabaseController {
+
+    public UserController() throws SQLException, ClassNotFoundException {
+    }
 
     // Add new user to Users table
     public boolean CreateUser(User user, String password){
@@ -39,7 +41,7 @@ public class UserController extends DatabaseController {
             Statement statement = connection.createStatement();
             String SQLQuery = String.format("SELECT * FROM Users WHERE Email = '%s' AND Password = '%s';", email, password);
             ResultSet rs = statement.executeQuery(SQLQuery);
-            while (rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("UserID");
             }
             return 0;

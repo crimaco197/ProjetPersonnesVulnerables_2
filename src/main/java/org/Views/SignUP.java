@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -152,7 +153,15 @@ public class SignUP extends JFrame {
                     System.out.println("All fields must be filled out.");
                 } else {
                     // Todos los campos están llenos, procede con el registro
-                    UserController connexion = new UserController();
+                    UserController connexion = null;
+                    try {
+                        connexion = new UserController();
+                    } catch (SQLException ex) { //SQLException: could not connect to database -> caused by not being connected to VPN
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) { // ClassNot..Exc: could not find driver to connect to database -> caused by not adding dependencie in pom.xml
+                        throw new RuntimeException(ex);
+                    }
+
                     User newUser = new User(Firstname.getText(), lastname.getText(), email.getText(), phone.getText());
                     connexion.CreateUser(newUser,passwordString);
                     VHelprequest reqFrame = new VHelprequest();
