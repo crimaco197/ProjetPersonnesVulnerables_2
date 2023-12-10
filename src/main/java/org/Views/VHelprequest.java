@@ -67,10 +67,13 @@ public class VHelprequest extends JFrame {
 	private JTextField textField_Status;
 	private JTextField textField_Date;
 
+	private String userName;
+
 
 	public VHelprequest(String user) {
 		initComponents(user);
 		setVisible(true);
+		userName = user;
 		// errorOptionPane = new JOptionPane();
 	}
 	
@@ -355,7 +358,7 @@ public class VHelprequest extends JFrame {
 			HelpRequestController connexion = new HelpRequestController();
 			Helprequest newRequest = new Helprequest(textField_Tittle.getText(), Text_Description.getText(), new Date(),
 					textField_Status.getText());
-			connexion.CreateHelpRequest(newRequest);
+			connexion.CreateHelpRequest(newRequest, userName);
 			JOptionPane.showMessageDialog(this, "add succesfuly");
 			show_table_dataActionPerformed(evt);
 			textField_Tittle.setText("");

@@ -25,10 +25,10 @@ public class HelpRequestController extends DatabaseController{
         }
     }
 
-    public boolean CreateHelpRequest(Helprequest request, int userID){
+    public boolean CreateHelpRequest(Helprequest request, String userName){
         try {
             Statement statement = connection.createStatement();
-            String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Status,Date) VALUES ('%s', '%s', 'waiting' ,'%s');", request.getTitle(), request.getDescription(), request.getStringDate());
+            String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Status,Date,RequestBy) VALUES ('%s', '%s', 'waiting' ,'%s', '%s');", request.getTitle(), request.getDescription(), request.getStringDate(), userName);
             return statement.execute(SQLQuery1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -75,12 +75,12 @@ public class HelpRequestController extends DatabaseController{
         }
     }
 
-    public List<Helprequest> getWaitingRequests() {
+    public List<Helprequest> getWaitingRequests(String userName) {
         List<Helprequest> requests = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-            String sql =  "SELECT ID, Title, Date, Description, Status, RequestBy, Volunteer FROM projet_gei_026.HelpRequests WHERE Status = 'waiting'";
+            String sql =  String.format("SELECT ID, Title, Date, Description, Status, RequestBy, Volunteer FROM projet_gei_026.HelpRequests WHERE Status = 'waiting' AND RequestBy != '%s'", userName);
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()){
@@ -102,7 +102,34 @@ public class HelpRequestController extends DatabaseController{
             throw new RuntimeException(e);
         }
     }
-    
+
+    public List<Helprequest> getRequestByUser(String userName) {
+        List<Helprequest> requests = new ArrayList<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            String sql =  String.format("SELECT ID, Title, Date, Description, Status, RequestBy, Volunteer FROM projet_gei_026.HelpRequests WHERE RequestBy = '%s'", userName);
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String status = rs.getString("Status");
+                Date date = rs.getDate("Date");
+                String requestby = rs.getString("RequestBy");
+                String volunteer = rs.getString("Volunteer");
+
+                Helprequest hr = new Helprequest(id,title, description, date, status, requestby, volunteer);
+                requests.add(hr);
+            }
+
+            return  requests;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public boolean assignVolunteerToRequest(int requestId, String volunteerName) throws SQLException {
         // Implementa la lógica para asignar un voluntario a una solicitud de ayuda en la base de datos
         Statement statement = connection.createStatement();

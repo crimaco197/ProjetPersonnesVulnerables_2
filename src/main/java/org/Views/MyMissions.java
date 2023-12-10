@@ -48,12 +48,15 @@ public class MyMissions extends JFrame {
 	private JPanel panel_right;
 
 	private JTable tableVolunteerMissions;
-	
+
+	private String userName;
+
 
 
 	public MyMissions(String user) throws ClassNotFoundException, SQLException {
 		initComponents(user);
 		setVisible(true);
+		userName = user;
 		// errorOptionPane = new JOptionPane();
 	}
 	
@@ -263,7 +266,7 @@ public class MyMissions extends JFrame {
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 		// Vider la table avant d'exécuter la mise à jour
 		tb1Model.setRowCount(0);
-		List<Helprequest> helprequestList = connexion.getWaitingRequests();
+		List<Helprequest> helprequestList = connexion.getWaitingRequests(userName);
 
 		for (Helprequest hr : helprequestList) {
 			String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getDate().toString(), hr.getDescription(), hr.getStatus(), hr.getVolunteer() };
