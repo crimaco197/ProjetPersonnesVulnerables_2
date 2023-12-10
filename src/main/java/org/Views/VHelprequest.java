@@ -41,7 +41,12 @@ public class VHelprequest extends JFrame {
 	// PANEL LEFT
 	private JPanel panel_left;
 
-	private JTable TableRequest;
+	public JTable TableRequest;
+
+	public JButton getBtn_show_table_data() {
+		return btn_show_table_data;
+	}
+
 	private JButton btn_show_table_data;
 	private JButton btn_MakeReview;
 
@@ -58,14 +63,52 @@ public class VHelprequest extends JFrame {
 	private JLabel Label_Date;
 
 	private JLabel Label_Description;
+
+	public JTextField getText_Description() {
+		return Text_Description;
+	}
+
 	private JTextField Text_Description;
+
+	public String getUpdate() {
+		return Update;
+	}
+
+	private String Update;
 
 	private JButton btn_Valider;
 	private JButton btn_update;
 	private JPanel panel_profil;
+
+	public JTextField getTextField_Tittle() {
+		return textField_Tittle;
+	}
+
 	private JTextField textField_Tittle;
+
+	public JTextField getTextField_Status() {
+		return textField_Status;
+	}
+
 	private JTextField textField_Status;
+
+	public JTextField getTextField_Date() {
+		return textField_Date;
+	}
+
 	private JTextField textField_Date;
+
+	public String getError() {
+		return error;
+	}
+
+	private String error ;
+
+	public String getSuccess() {
+		return success;
+	}
+
+	private String success ;
 
 	private String userName;
 
@@ -76,8 +119,11 @@ public class VHelprequest extends JFrame {
 		userName = user;
 		// errorOptionPane = new JOptionPane();
 	}
-	
 
+
+	public JButton getBtn_Valider() {
+		return btn_Valider;
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -202,6 +248,7 @@ public class VHelprequest extends JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					show_table_dataActionPerformed(evt);
+					success=" data loaded";
 				} catch (SQLException e) {
 					throw new RuntimeException(e);
 				} catch (ClassNotFoundException e) {
@@ -310,6 +357,7 @@ public class VHelprequest extends JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     btnupdateActionPerformed(evt);
+					Update="Sucess";
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
@@ -343,11 +391,12 @@ public class VHelprequest extends JFrame {
 		// TODO add your handling code here:
 	}// GEN-LAST:event_txttitleActionPerformed
 
-	private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_ValiderActionPerformed
+	public void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_ValiderActionPerformed
 		// TODO add your handling code here:
 		if (textField_Tittle.getText().equals("") || Text_Description.getText().equals("")
 				|| textField_Date.getText().equals("") || textField_Status.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Enter all data", "Missing Data", JOptionPane.ERROR_MESSAGE);
+			new CustomDialog("Enter all data", "Missing Data", 3);
+			error = "Enter all data";
 
 		} else {
 			/*String data[] = { textField_Tittle.getText(), textField_Date.getText(), Text_Description.getText(),
@@ -359,7 +408,8 @@ public class VHelprequest extends JFrame {
 			Helprequest newRequest = new Helprequest(textField_Tittle.getText(), Text_Description.getText(), new Date(),
 					textField_Status.getText());
 			connexion.CreateHelpRequest(newRequest, userName);
-			JOptionPane.showMessageDialog(this, "add succesfuly");
+			new CustomDialog("add succesfuly", "Data saved", 3);
+			success = "add succesfuly";
 			show_table_dataActionPerformed(evt);
 			textField_Tittle.setText("");
 			Text_Description.setText("");
@@ -369,14 +419,14 @@ public class VHelprequest extends JFrame {
 
 	}// GEN-LAST:event_ValiderActionPerformed
 
-	private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTable1MouseClicked
+	public void jTable1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTable1MouseClicked
 		// TODO add your handling code here:
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 
-		String tbltitle = tb1Model.getValueAt(TableRequest.getSelectedRow(), 0).toString();
-		String tbldescription = tb1Model.getValueAt(TableRequest.getSelectedRow(), 1).toString();
+		String tbltitle = tb1Model.getValueAt(TableRequest.getSelectedRow(), 1).toString();
+		String tbldescription = tb1Model.getValueAt(TableRequest.getSelectedRow(), 3).toString();
 		String tbldate = tb1Model.getValueAt(TableRequest.getSelectedRow(), 2).toString();
-		String tblstatut = tb1Model.getValueAt(TableRequest.getSelectedRow(), 3).toString();
+		String tblstatut = tb1Model.getValueAt(TableRequest.getSelectedRow(), 4).toString();
 
 		textField_Tittle.setText(tbltitle);
 		Text_Description.setText(tbldescription);
@@ -384,7 +434,7 @@ public class VHelprequest extends JFrame {
 		textField_Status.setText(tblstatut);
 	}// GEN-LAST:event_jTable1MouseClicked
 
-	private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_btnupdateActionPerformed
+	public void btnupdateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_btnupdateActionPerformed
 		// TODO add your handling code here:
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 
@@ -396,6 +446,7 @@ public class VHelprequest extends JFrame {
 			HelpRequestController connexion = new HelpRequestController();
 			try {
 				connexion.UpdateHelpRequest(statut, title);
+
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
@@ -404,8 +455,8 @@ public class VHelprequest extends JFrame {
 //	            tb1Model.setValueAt(date, jTable1.getSelectedRow(), 1);
 //	            tb1Model.setValueAt(description, jTable1.getSelectedRow(), 2);
 			tb1Model.setValueAt(statut, TableRequest.getSelectedRow(), 3);
-
-			JOptionPane.showMessageDialog(this, "Update succesfuly");
+			new CustomDialog("Update succesfuly", "Data updated", 3);
+			success ="Update succesfuly";
 			textField_Tittle.setText("");
 			Text_Description.setText("");
 			textField_Date.setText("");
@@ -413,9 +464,11 @@ public class VHelprequest extends JFrame {
 
 		} else {
 			if (TableRequest.getRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Table is empty", "Missing Data", JOptionPane.ERROR_MESSAGE);
+				new CustomDialog("Table is empty", "Missing Data", 3);
+				error="Table is empty";
 			} else {
-				JOptionPane.showMessageDialog(this, "Please select Single Row for update", "Missing Data", JOptionPane.ERROR_MESSAGE);
+				error = "Please select Single Row for update";
+				new CustomDialog("Please select Single Row for update", "Missing Data", 3);
 			}
 		}
 
