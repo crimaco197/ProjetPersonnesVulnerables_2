@@ -178,18 +178,7 @@ public class Login extends JFrame {
         contentPane_Left.setBackground(new Color(0, 128, 128));
         contentPane_Left.setBounds(0, 0, 400, 483);
         contentPane.add(contentPane_Left);
-        
-     //   ImageIcon icon = new ImageIcon(Login.class.getResource("../images/healthcare.png"));
-      //  Image image = icon.getImage();
-    //    int width = 150;
-     //   int height = 150;
-      //  Image newimg = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-      //  icon = new ImageIcon(newimg);
 
-    // /Users/cristianmartinez/Library/Mobile Documents/com~apple~CloudDocs/UNIVERSIDADES/INSA TOULOUSE/CONDUITE_PROJET(PDLA)/ProjetPersonnesVulnerables_2/src/main/resources/images/healthcare.png
-    //    JLabel logo = new JLabel(icon);
-    //    logo.setBounds(100, 50, 200, 200);
-     //   contentPane_Left.add(logo);
         
         ImageIcon icon = new ImageIcon(Login.class.getResource("/images/healthcare.png"));
         Image image = icon.getImage();

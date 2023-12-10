@@ -27,9 +27,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class MyRequests extends JFrame {
 
-	/*
-	 */
-
 	private JPanel getContentPane;
 
 	private JPanel panel_menu;
@@ -43,7 +40,6 @@ public class MyRequests extends JFrame {
 
 	private JTable TableRequest;
 	private JButton btn_show_table_data;
-	private JButton btn_MakeReview;
 
 	// PANEL RIGHT
 	private JPanel panel_right;
@@ -53,21 +49,16 @@ public class MyRequests extends JFrame {
 
 	private JLabel Title;
 
-	private JLabel Label_status;
-
 	private JLabel Label_Date;
 
 	private JLabel Label_Description;
 	private JTextField Text_Description;
 
-	private JButton btn_Valider;
 	private JButton btn_update;
 	private JPanel panel_profil;
 	private JTextField textField_Tittle;
-	private JTextField textField_Status;
 	private JTextField textField_Date;
 	
-	private JLabel lbl_ID_Request;
 	private Integer id_Request;
 	private String status_Request;
 
@@ -150,7 +141,7 @@ public class MyRequests extends JFrame {
         btn_Missions.setText("Missions");
         btn_Missions.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         btn_Missions.setBackground(Color.LIGHT_GRAY);
-        btn_Missions.setBounds(1000, 96, 100, 40);
+        btn_Missions.setBounds(1020, 96, 100, 40);
         btn_Missions.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
     		MyMissions homePage = null;
@@ -173,7 +164,7 @@ public class MyRequests extends JFrame {
         btn_MyRequest.setForeground(new Color(0, 128, 128));
         btn_MyRequest.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         btn_MyRequest.setBackground(Color.LIGHT_GRAY);
-        btn_MyRequest.setBounds(870, 96, 100, 40);
+        btn_MyRequest.setBounds(870, 96, 120, 40);
         panel_menu.add(btn_MyRequest);
 
 
@@ -226,20 +217,6 @@ public class MyRequests extends JFrame {
 				}
 			}
 		});
-		
-		
-		// PanelRequests.setViewportView(TableRequest);
-		
-
-		/*
-		btn_MakeReview = new JButton();
-		btn_MakeReview.setForeground(new Color(0, 128, 128));
-		btn_MakeReview.setBackground(new Color(128, 128, 128));
-		btn_MakeReview.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-		btn_MakeReview.setText("Make Review");
-		btn_MakeReview.setBounds(350, 375, 150, 50);
-		panel_left.add(btn_MakeReview);
-		*/
 
 		// RIGHT PANEL
 		panel_right = new JPanel();
@@ -298,7 +275,7 @@ public class MyRequests extends JFrame {
 		btn_update.setLocation(160, 320);
 		btn_update.setSize(200, 40);
 		panel_profil.add(btn_update);
-		btn_update.setBackground(new Color(169,169,169));
+		btn_update.setBackground(new Color(169, 169, 169));
 		btn_update.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_update.setText("Update Request");
 		btn_update.addActionListener(new java.awt.event.ActionListener() {
@@ -353,20 +330,14 @@ public class MyRequests extends JFrame {
 				} catch (NullPointerException e2){
 					JOptionPane.showMessageDialog(MyRequests.this, "No request has been selected to mark as done", "No request selected", JOptionPane.OK_OPTION);
 				}
-
-
-
-
 			}
 		});
 		btn_update_Done.setText("Request Done");
 		btn_update_Done.setForeground(new Color(0, 128, 128));
 		btn_update_Done.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		btn_update_Done.setBackground(new Color (169,169,169));
+		btn_update_Done.setBackground(new Color(169, 169, 169));
 		btn_update_Done.setBounds(160, 375, 200, 40);
 		panel_profil.add(btn_update_Done);
-		
-
 		// FIN TABLA PERFILES
 	}
 

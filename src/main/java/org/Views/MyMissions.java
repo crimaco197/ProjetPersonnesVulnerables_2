@@ -27,9 +27,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class MyMissions extends JFrame {
 
-	/*
-	 */
-
 	private JPanel getContentPane;
 
 	private JPanel panel_menu;
@@ -74,8 +71,7 @@ public class MyMissions extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
+
 	private void initComponents(String user) throws ClassNotFoundException, SQLException {
 
 		// Creacion Main Panel
@@ -126,24 +122,6 @@ public class MyMissions extends JFrame {
         btn_Home.setText("Home");
         btn_Home.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         btn_Home.setBackground(Color.LIGHT_GRAY);
-        
-        btn_MyRequest = new JButton();
-        btn_MyRequest.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		MyRequests requestsPage = null;
-    			requestsPage = new MyRequests(user);
-    			requestsPage.setVisible(true);
-        		requestButtonClicked= true;
-           		MyMissions.this.dispose();
-           		System.out.println("you have change To My Requests");
-        	}
-        });
-        btn_MyRequest.setText("My Requests");
-        btn_MyRequest.setForeground(new Color(0, 128, 128));
-        btn_MyRequest.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        btn_MyRequest.setBackground(Color.LIGHT_GRAY);
-        btn_MyRequest.setBounds(870, 96, 100, 40);
-        panel_menu.add(btn_MyRequest);
 
 
 
@@ -164,13 +142,29 @@ public class MyMissions extends JFrame {
            		System.out.println("you have change To Home");
         	}
         });
+        
+        btn_MyRequest = new JButton();
+        btn_MyRequest.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MyRequests requestsPage = null;
+    			requestsPage = new MyRequests(user);
+    			requestsPage.setVisible(true);
+        		requestButtonClicked= true;
+           		MyMissions.this.dispose();
+           		System.out.println("you have change To My Requests");
+        	}
+        });
+        btn_MyRequest.setText("My Requests");
+        btn_MyRequest.setForeground(new Color(0, 128, 128));
+        btn_MyRequest.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+        btn_MyRequest.setBackground(Color.LIGHT_GRAY);
+        btn_MyRequest.setBounds(870, 96, 120, 40);
+        panel_menu.add(btn_MyRequest);
         btn_Missions.setText("Missions");
         btn_Missions.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         btn_Missions.setBackground(Color.LIGHT_GRAY);
-        btn_Missions.setBounds(1000, 96, 100, 40);
+        btn_Missions.setBounds(1020, 96, 100, 40);
         panel_menu.add(btn_Missions);
-        
-        
 
 
 		// LEFT PANEL
@@ -198,10 +192,10 @@ public class MyMissions extends JFrame {
 		scrollPane.setBounds(40, 20, 520, 300);
 		panel_left.add(scrollPane);
 
-
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setForeground(new Color(0, 128, 128));
-		btn_show_table_data.setBackground(new Color(169,169,169));
+		btn_show_table_data.setBackground(new Color(169, 169, 169));
+
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_show_table_data.setText("Show Waiting Requests");
 		btn_show_table_data.setBounds(100, 375, 200, 50);
@@ -221,7 +215,7 @@ public class MyMissions extends JFrame {
 
 		btn_Postulate = new JButton();
 		btn_Postulate.setForeground(new Color(0, 128, 128));
-		btn_Postulate.setBackground(new Color (169,169,169));
+		btn_Postulate.setBackground(new Color(169, 169, 169));
 		btn_Postulate.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_Postulate.setText("Postulate");
 		btn_Postulate.setBounds(350, 375, 150, 50);
@@ -274,9 +268,6 @@ public class MyMissions extends JFrame {
 
 		// Llena la tabla con misiones voluntarias
 		fillVolunteerMissions(user);
-
-
-
 	}
 
 	private void fillVolunteerMissions(String volunteerName) throws ClassNotFoundException, SQLException {
