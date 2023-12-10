@@ -13,7 +13,17 @@ public class User {
         Email = email;
         PhoneNumber = phoneNumber;
     }
+    
+ 
 
+        public User(String firstName, String lastName, String email, String phoneNumber, String password) {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Password = password;
+        }
+    
     public int getUserID() {
         return userID;
     }

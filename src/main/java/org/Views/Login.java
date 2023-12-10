@@ -132,6 +132,7 @@ public class Login extends JFrame {
                     // Muestra un mensaje de error
                     errorMessage = "All fields must be filled out.";
                     new CustomDialog("All fields must be filled out.", "Login Error", 3);
+                    //JOptionPane.showMessageDialog(Login.this, "All fields must be filled out.", "Login Error", JOptionPane.ERROR_MESSAGE);
 
                 } else {
                     // Todos los campos están llenos, procede con el login
@@ -143,17 +144,20 @@ public class Login extends JFrame {
                         //mensaje de error: error conectandose a la base de datos;
                     }
                     int userID = connexion.VerifyUserCredentials(email.getText(), passwordString);
+                    String FirstName = connexion.getName(email.getText(), passwordString);
                     if(userID!=0){
-                        VHelprequest reqFrame = new VHelprequest();
+                        VHelprequest reqFrame = new VHelprequest(FirstName);
                         reqFrame.setVisible(true);
                         loginSuccessful = true;
 
                         Login.this.dispose();
-                        System.out.println("You have login, user" + userID);
+                        System.out.println("You have login, user: " + FirstName);
 
                     }else{
                         errorMessage = "Incorrect email or password. Please try again.";
                         new CustomDialog("Incorrect email or password. Please try again.", "Identification Error", 3);
+
+                     //   JOptionPane.showMessageDialog(Login.this, "Incorrect email or password. Please try again.", "Identification Error", JOptionPane.ERROR_MESSAGE);
 
                         email.setText("");
                         passwordField.setText("");

@@ -49,4 +49,19 @@ public class UserController extends DatabaseController {
             throw new RuntimeException(e);
         }
     }
+    
+    public String getName(String email, String password) {
+        try {
+            Statement statement = connection.createStatement();
+            String SQLQuery = String.format("SELECT FirstName FROM Users WHERE Email = '%s' AND Password = '%s';", email, password);
+            ResultSet rs = statement.executeQuery(SQLQuery);
+            if (rs.next()) {
+                return rs.getString("FirstName"); // Cambiado para retornar el nombre del usuario
+            }
+            return null; // Cambiado para retornar null si no hay coincidencias
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

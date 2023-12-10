@@ -8,7 +8,7 @@ public class Helprequest {
     private Date Date ;
     private String Status;
     private int RequestBy ;
-    private int Volunteer ;
+    private String Volunteer ;
 
     public Helprequest(String title, String description, Date date, String status ) {
         Title = title;
@@ -17,7 +17,7 @@ public class Helprequest {
         Status = status;
     }
 
-    public Helprequest(int ID, String title, String description, java.util.Date date, String status, int requestBy, int volunteer) {
+    public Helprequest(int ID, String title, String description, java.util.Date date, String status, int requestBy, String volunteer) {
         this.ID = ID;
         Title = title;
         Description = description;
@@ -63,7 +63,7 @@ public class Helprequest {
         return RequestBy;
     }
 
-    public int getVolunteer() {
+    public String getVolunteer() {
         return Volunteer;
     }
 
@@ -87,7 +87,7 @@ public class Helprequest {
         RequestBy = requestBy;
     }
 
-    public void setVolunteer(int volunteer) {
+    public void setVolunteer(String volunteer) {
         Volunteer = volunteer;
     }
 }

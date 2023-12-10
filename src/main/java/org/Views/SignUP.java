@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.desktop.ScreenSleepEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -27,11 +28,12 @@ public class SignUP extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField lastname;
-    private JTextField Firstname;
+    private JTextField firstname;
     private JTextField phone;
     private JTextField email;
     private JTextField password;
     private JPasswordField passwordField;
+    private String passwordString;
     private JButton btn_SignUp;
     private JButton btn_toLogin ;
     private String messi ;
@@ -75,10 +77,10 @@ public class SignUP extends JFrame {
         label_lastname.setBounds(80, 124, 78, 13);
         contentPane_Right.add(label_lastname);
 
-        Firstname = new JTextField();
-        Firstname.setColumns(10);
-        Firstname.setBounds(80, 186, 267, 28);
-        contentPane_Right.add(Firstname);
+        firstname = new JTextField();
+        firstname.setColumns(10);
+        firstname.setBounds(80, 186, 267, 28);
+        contentPane_Right.add(firstname);
 
         JLabel label_name = new JLabel("Firstname");
         label_name.setBounds(80, 174, 78, 13);
@@ -101,12 +103,6 @@ public class SignUP extends JFrame {
         JLabel label_email = new JLabel("Email");
         label_email.setBounds(80, 274, 78, 13);
         contentPane_Right.add(label_email);
-
-        //password = new JPasswordField();
-        password = new JPasswordField(20);
-        password.setColumns(10);
-        password.setBounds(80, 336, 267, 28);
-        contentPane_Right.add(password);
         
 
         JLabel label_password = new JLabel("Password");
@@ -149,7 +145,7 @@ public class SignUP extends JFrame {
                 char[] password = passwordField.getPassword();
                 String passwordString = new String(password);
 
-                if (Firstname.getText().trim().isEmpty() || lastname.getText().trim().isEmpty() ||
+                if (firstname.getText().trim().isEmpty() || lastname.getText().trim().isEmpty() ||
                         email.getText().trim().isEmpty() || phone.getText().trim().isEmpty() ||
                         passwordString.trim().isEmpty()) {
 
@@ -162,22 +158,24 @@ public class SignUP extends JFrame {
                     UserController connexion = null;
                     try {
                         connexion = new UserController();
+                        User newUser = new User(firstname.getText(), lastname.getText(), email.getText(), phone.getText());
+                        String newUserString = firstname.getText();
+                        connexion.CreateUser(newUser,passwordString);
+                        VHelprequest reqFrame = new VHelprequest(newUserString);
+                        reqFrame.setVisible(true);
+                        SignUP.this.dispose();
+                        messi = "You have signed up";
+                        System.out.println("You have signed up");
                     } catch (SQLException ex) { //SQLException: could not connect to database -> caused by not being connected to VPN
                         throw new RuntimeException(ex);
                     } catch (ClassNotFoundException ex) { // ClassNot..Exc: could not find driver to connect to database -> caused by not adding dependencie in pom.xml
                         throw new RuntimeException(ex);
                     }
 
-                    User newUser = new User(Firstname.getText(), lastname.getText(), email.getText(), phone.getText());
-                    connexion.CreateUser(newUser,passwordString);
-                    VHelprequest reqFrame = new VHelprequest();
-                    reqFrame.setVisible(true);
-                    SignUP.this.dispose();
-                    messi = "You have signed up";
-                    System.out.println("You have signed up");
+                    
                 }
             }
-        });
+        }); 
         btn_SignUp.setForeground(new Color(0, 128, 128));
         btn_SignUp.setBackground(Color.LIGHT_GRAY);
         btn_SignUp.setBounds(150, 415, 100, 40);
@@ -213,11 +211,12 @@ public class SignUP extends JFrame {
         contentPane_Left.repaint();
 
     }
+    /*
     public JTextField getLastName() {
         return lastname;
     }
     public JTextField getFirstname() {
-        return Firstname;
+        return firstname;
     }
     public JTextField getEmail() {
         return email;
@@ -234,11 +233,11 @@ public class SignUP extends JFrame {
     public JButton getButlogin() {
         return btn_toLogin;
     }
+    */
     public String getMessi(){ return messi ; }
     public boolean isSignUpButtonClicked() {
         return loginButtonClicked;
     }
-
 
 
 }

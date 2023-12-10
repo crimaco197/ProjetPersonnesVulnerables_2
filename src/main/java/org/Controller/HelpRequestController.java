@@ -2,6 +2,7 @@ package org.Controller;
 
 import org.Model.Helprequest;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -61,7 +62,7 @@ public class HelpRequestController extends DatabaseController{
                 String status = rs.getString("Status");
                 Date date = rs.getDate("Date");
                 int requestby = rs.getInt("RequestBy");
-                int volunteer = rs.getInt("Volunteer");
+                String volunteer = rs.getString("Volunteer");
 
                 Helprequest hr = new Helprequest(id,title, description, date, status, requestby, volunteer);
                 requests.add(hr);
@@ -73,4 +74,43 @@ public class HelpRequestController extends DatabaseController{
             throw new RuntimeException(e);
         }
     }
+    
+    public void assignVolunteerToRequest(int requestId, String volunteerName) throws SQLException {
+        // Implementa la lógica para asignar un voluntario a una solicitud de ayuda en la base de datos
+        String SQLQuery = "UPDATE HelpRequests SET Volunteer = ? WHERE ID = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(SQLQuery)) {
+            pstmt.setString(1, volunteerName);
+            pstmt.setInt(2, requestId);
+            pstmt.executeUpdate();
+        }
+    }
+    
+    public List<Helprequest> getVolunteerRequests(String volunteerName) {
+        List<Helprequest> volunteerRequests = new ArrayList<>();
+        String sql = "SELECT * FROM HelpRequests WHERE Volunteer = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, volunteerName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // Asumiendo que tienes un constructor adecuado en tu clase Helprequest
+                Helprequest request = new Helprequest(
+                        rs.getInt("ID"),
+                        rs.getString("Title"),
+                        rs.getString("Description"),
+                        rs.getDate("Date"),
+                        rs.getString("Status"),
+                        rs.getInt("RequestBy"),
+                        rs.getString("Volunteer")
+                );
+                volunteerRequests.add(request);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Consider a more robust exception handling strategy for production code
+        }
+
+        return volunteerRequests;
+    }
+
 }
