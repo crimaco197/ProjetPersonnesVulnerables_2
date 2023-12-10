@@ -143,6 +143,12 @@ public class HelpRequestController extends DatabaseController{
         }*/
     }
     
+    public boolean MarkRequestAsDone(int requestID) throws SQLException {
+        Statement statement = connection.createStatement();
+        String SQLQuery1 = String.format("UPDATE HelpRequests SET Status = 'done' WHERE ID = '%d'", requestID);
+        return statement.execute(SQLQuery1);
+    }
+    
     public List<Helprequest> getVolunteerRequests(String volunteerName) {
         List<Helprequest> volunteerRequests = new ArrayList<>();
         String sql = "SELECT * FROM HelpRequests WHERE Volunteer = ?";
@@ -169,12 +175,6 @@ public class HelpRequestController extends DatabaseController{
         }
 
         return volunteerRequests;
-    }
-
-    public boolean MarkRequestAsDone(int requestID) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQLQuery1 = String.format("UPDATE HelpRequests SET Status = 'done' WHERE ID = '%d'", requestID);
-        return statement.execute(SQLQuery1);
     }
 
 }

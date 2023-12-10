@@ -27,7 +27,13 @@ public class Helprequest {
         Volunteer = volunteer;
     }
 
-    public void setID(int ID) {
+    public Helprequest(Integer id_Request, String title2, String description2) {
+		this.ID = id_Request;
+		Title = title2;
+		Description = description2;
+		}
+
+	public void setID(int ID) {
         this.ID = ID;
     }
 

@@ -36,6 +36,8 @@ public class MyMissions extends JFrame {
 	private JLabel label_NameAPP;
 	private JLabel Label_Welcome;
 	private boolean homeButtonClicked;
+	private boolean requestButtonClicked;
+	private boolean missionsButtonClicked;
 
 	// PANEL LEFT
 	private JPanel panel_left;
@@ -43,6 +45,8 @@ public class MyMissions extends JFrame {
 	private JTable TableRequest;
 	private JButton btn_show_table_data;
 	private JButton btn_Postulate;
+	private JButton btn_MyRequest;
+
 
 	// PANEL RIGHT
 	private JPanel panel_right;
@@ -107,6 +111,7 @@ public class MyMissions extends JFrame {
         panel_menu.add(Label_Welcome);
 
         JButton btn_Home = new JButton();
+        btn_Home.setForeground(new Color(0, 128, 128));
         btn_Home.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		VHelprequest homePage = new VHelprequest(user);
@@ -116,24 +121,56 @@ public class MyMissions extends JFrame {
            		System.out.println("you have change To Sign Up");
         	}
         });
-        btn_Home.setBounds(823, 96, 100, 40);
+        btn_Home.setBounds(740, 96, 100, 40);
         panel_menu.add(btn_Home);
         btn_Home.setText("Home");
         btn_Home.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        btn_Home.setBackground(new Color(0, 204, 0));
+        btn_Home.setBackground(Color.LIGHT_GRAY);
+        
+        btn_MyRequest = new JButton();
+        btn_MyRequest.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MyRequests requestsPage = null;
+    			requestsPage = new MyRequests(user);
+    			requestsPage.setVisible(true);
+        		requestButtonClicked= true;
+           		MyMissions.this.dispose();
+           		System.out.println("you have change To My Requests");
+        	}
+        });
+        btn_MyRequest.setText("My Requests");
+        btn_MyRequest.setForeground(new Color(0, 128, 128));
+        btn_MyRequest.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+        btn_MyRequest.setBackground(Color.LIGHT_GRAY);
+        btn_MyRequest.setBounds(870, 96, 100, 40);
+        panel_menu.add(btn_MyRequest);
 
 
 
         JButton btn_Missions = new JButton();
+        btn_Missions.setForeground(new Color(0, 128, 128));
         btn_Missions.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		MyMissions missionsPage = null;
+    			try {
+    				missionsPage = new MyMissions(user);
+    			} catch (ClassNotFoundException | SQLException e1) {
+    				// TODO Auto-generated catch block
+    				e1.printStackTrace();
+    			}
+    			missionsPage.setVisible(true);
+        		missionsButtonClicked = true;
+           		MyMissions.this.dispose();
+           		System.out.println("you have change To Home");
         	}
         });
         btn_Missions.setText("Missions");
         btn_Missions.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        btn_Missions.setBackground(new Color(0, 204, 0));
-        btn_Missions.setBounds(962, 96, 100, 40);
+        btn_Missions.setBackground(Color.LIGHT_GRAY);
+        btn_Missions.setBounds(1000, 96, 100, 40);
         panel_menu.add(btn_Missions);
+        
+        
 
 
 		// LEFT PANEL
@@ -163,7 +200,8 @@ public class MyMissions extends JFrame {
 
 
 		btn_show_table_data = new JButton();
-		btn_show_table_data.setBackground(new java.awt.Color(0, 204, 0));
+		btn_show_table_data.setForeground(new Color(0, 128, 128));
+		btn_show_table_data.setBackground(Color.GRAY);
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_show_table_data.setText("Show Waiting Requests");
 		btn_show_table_data.setBounds(100, 375, 200, 50);
@@ -182,7 +220,8 @@ public class MyMissions extends JFrame {
 
 
 		btn_Postulate = new JButton();
-		btn_Postulate.setBackground(new java.awt.Color(0, 204, 0));
+		btn_Postulate.setForeground(new Color(0, 128, 128));
+		btn_Postulate.setBackground(Color.GRAY);
 		btn_Postulate.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_Postulate.setText("Postulate");
 		btn_Postulate.setBounds(350, 375, 150, 50);

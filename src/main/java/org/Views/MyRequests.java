@@ -25,7 +25,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class VHelprequest extends JFrame {
+public class MyRequests extends JFrame {
 
 	/*
 	 */
@@ -36,18 +36,12 @@ public class VHelprequest extends JFrame {
 	private JLabel label_NameAPP;
 	private JLabel Label_Welcome;
 	private boolean missionsButtonClicked;
-	private boolean requestButtonClicked;
 
 
 	// PANEL LEFT
 	private JPanel panel_left;
 
-	public JTable TableRequest;
-
-	public JButton getBtn_show_table_data() {
-		return btn_show_table_data;
-	}
-
+	private JTable TableRequest;
 	private JButton btn_show_table_data;
 	private JButton btn_MakeReview;
 
@@ -64,70 +58,32 @@ public class VHelprequest extends JFrame {
 	private JLabel Label_Date;
 
 	private JLabel Label_Description;
-
-	public JTextField getText_Description() {
-		return Text_Description;
-	}
-
 	private JTextField Text_Description;
 
-	public String getUpdate() {
-		return Update;
-	}
-
-	private String Update;
-
 	private JButton btn_Valider;
-
-	private JButton btn_Create_Request;
 	private JButton btn_update;
 	private JPanel panel_profil;
-
-	public JTextField getTextField_Tittle() {
-		return textField_Tittle;
-	}
-
 	private JTextField textField_Tittle;
-
-	public JTextField getTextField_Status() {
-		return textField_Status;
-	}
-
 	private JTextField textField_Status;
-
-	public JTextField getTextField_Date() {
-		return textField_Date;
-	}
-
 	private JTextField textField_Date;
-
-	public String getError() {
-		return error;
-	}
-
-	private String error ;
-
-	public String getSuccess() {
-		return success;
-	}
-
-	private String success ;
+	
+	private JLabel lbl_ID_Request;
+	private Integer id_Request;
+	private String status_Request;
 
 	private String userName;
 	private JButton btn_MyRequest;
+	private JButton btn_update_Done;
 
 
-	public VHelprequest(String user) {
+	public MyRequests(String user) {
 		initComponents(user);
 		setVisible(true);
 		userName = user;
 		// errorOptionPane = new JOptionPane();
 	}
+	
 
-
-	public JButton getBtn_Valider() {
-		return btn_Valider;
-	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -178,7 +134,7 @@ public class VHelprequest extends JFrame {
         		VHelprequest homePage = new VHelprequest(user);
         		homePage.setVisible(true);
         		missionsButtonClicked = true;
-           		VHelprequest.this.dispose();
+        		MyRequests.this.dispose();
            		System.out.println("you have change To MyMissions");
         	}
         });
@@ -197,34 +153,22 @@ public class VHelprequest extends JFrame {
         btn_Missions.setBounds(1000, 96, 100, 40);
         btn_Missions.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-    		MyMissions missionsPage = null;
+    		MyMissions homePage = null;
 			try {
-				missionsPage = new MyMissions(user);
+				homePage = new MyMissions(user);
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			missionsPage.setVisible(true);
+    		homePage.setVisible(true);
     		missionsButtonClicked = true;
-       		VHelprequest.this.dispose();
+    		MyRequests.this.dispose();
        		System.out.println("you have change To Home");
     	}
     });
         panel_menu.add(btn_Missions);
         
-        
-        
         btn_MyRequest = new JButton();
-        btn_MyRequest.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		MyRequests requestsPage = null;
-    			requestsPage = new MyRequests(user);
-    			requestsPage.setVisible(true);
-        		requestButtonClicked= true;
-           		VHelprequest.this.dispose();
-           		System.out.println("you have change To My Requests");
-        	}
-        });
         btn_MyRequest.setText("My Requests");
         btn_MyRequest.setForeground(new Color(0, 128, 128));
         btn_MyRequest.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
@@ -257,20 +201,24 @@ public class VHelprequest extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(TableRequest);
 		scrollPane.setBounds(40, 20, 520, 300);
 		panel_left.add(scrollPane);
-
+		
+		TableRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jTable1MouseClicked(evt);
+			}
+		});
 		
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setForeground(new Color(0, 128, 128));
 		btn_show_table_data.setBackground(new Color(128, 128, 128));
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-		btn_show_table_data.setText("Show All Requests");
+		btn_show_table_data.setText("Show My Requests");
 		btn_show_table_data.setBounds(200, 375, 200, 50);
 		panel_left.add(btn_show_table_data);
 		btn_show_table_data.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					show_table_dataActionPerformed(evt);
-					success=" data loaded";
 				} catch (SQLException e) {
 					throw new RuntimeException(e);
 				} catch (ClassNotFoundException e) {
@@ -278,24 +226,27 @@ public class VHelprequest extends JFrame {
 				}
 			}
 		});
-	
+		
+		
+		// PanelRequests.setViewportView(TableRequest);
 		
 
-		
-//		btn_MakeReview = new JButton();
-//		btn_MakeReview.setForeground(new Color(0, 128, 128));
-//		btn_MakeReview.setBackground(new Color(128, 128, 128));
-//		btn_MakeReview.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-//		btn_MakeReview.setText("Make Review");
-//		btn_MakeReview.setBounds(350, 375, 150, 50);
-//		panel_left.add(btn_MakeReview);
-		
+		/*
+		btn_MakeReview = new JButton();
+		btn_MakeReview.setForeground(new Color(0, 128, 128));
+		btn_MakeReview.setBackground(new Color(128, 128, 128));
+		btn_MakeReview.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+		btn_MakeReview.setText("Make Review");
+		btn_MakeReview.setBounds(350, 375, 150, 50);
+		panel_left.add(btn_MakeReview);
+		*/
 
 		// RIGHT PANEL
 		panel_right = new JPanel();
 		panel_right.setBackground(Color.LIGHT_GRAY);
 		panel_right.setLayout(null);
 		panel_right.setBorder(new EmptyBorder(5, 5, 5, 5));
+		// contentPane_Right.setBackground(Color.LIGHT_GRAY);
 		panel_right.setBounds(600, 150, 600, 500);
 		getContentPane().add(panel_right);
 
@@ -312,11 +263,14 @@ public class VHelprequest extends JFrame {
 		Label_BigTittle.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
 		Label_BigTittle.setForeground(new Color(0, 128, 128));
 		Label_BigTittle.setText("Make Your Help Request");
+		// TablaProfile.setBackground(Color.LIGHT_GRAY);
+		// txt_title.setBounds(18, 120, 20, 20);
 
 		Text_Description = new JTextField();
 		panel_profil.add(Text_Description);
 		Text_Description.setBackground(Color.LIGHT_GRAY);
 		Text_Description.setBounds(60, 150, 400, 150);
+		// txtdate.setBounds(18, 40, 20, 20);
 
 
 		Label_Date = new JLabel();
@@ -338,16 +292,19 @@ public class VHelprequest extends JFrame {
 		Title.setBackground(Color.LIGHT_GRAY);
 		Title.setBounds(160, 79, 50, 20);
 		
-		btn_Create_Request = new JButton();
-		btn_Create_Request.setForeground(new Color(0, 128, 128));
-		panel_profil.add(btn_Create_Request);
-		btn_Create_Request.setBackground(Color.GRAY);
-		btn_Create_Request.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-		btn_Create_Request.setText("Create Request");
-		btn_Create_Request.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+		btn_update = new JButton();
+		btn_update.setForeground(new Color(0, 128, 128));
+		btn_update.setLocation(160, 320);
+		btn_update.setSize(200, 40);
+		panel_profil.add(btn_update);
+		btn_update.setBackground(Color.GRAY);
+		btn_update.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+		btn_update.setText("Update Request");
+		btn_update.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
-                    ValiderActionPerformed(evt);
+                    btnupdateActionPerformed(evt);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
@@ -355,102 +312,106 @@ public class VHelprequest extends JFrame {
                 }
             }
         });
-		btn_Create_Request.setBounds(160, 375, 200, 50);
-
 
 		textField_Tittle = new JTextField();
 		textField_Tittle.setBounds(210, 76, 150, 30);
 		panel_profil.add(textField_Tittle);
 		textField_Tittle.setColumns(10);
-
 		
 		textField_Date = new JTextField();
 		textField_Date.setColumns(10);
 		textField_Date.setBounds(330, 122, 130, 26);
 		panel_profil.add(textField_Date);
 		
+		JLabel lbl_ID_Request = new JLabel();
+		lbl_ID_Request.setBounds(60, 336, 61, 16);
+		panel_profil.add(lbl_ID_Request);
+		
+		btn_update_Done = new JButton();
+		btn_update_Done.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (status_Request.equals("assigned")) {
+				HelpRequestController setUPtoDone;
+				try {
+					setUPtoDone = new HelpRequestController();
+					setUPtoDone.MarkRequestAsDone(id_Request);
+					JOptionPane.showMessageDialog(MyRequests.this, "Request Done", "Updated succesfully", JOptionPane.OK_OPTION);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				}else if (status_Request.equals("done")) {
+					JOptionPane.showMessageDialog(MyRequests.this, "The request has been done", "Request Done", JOptionPane.OK_OPTION);
+				}else {
+					JOptionPane.showMessageDialog(MyRequests.this, "The request has not been assigned", "Missing Volunteer", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		btn_update_Done.setText("Request Done");
+		btn_update_Done.setForeground(new Color(0, 128, 128));
+		btn_update_Done.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		btn_update_Done.setBackground(Color.GRAY);
+		btn_update_Done.setBounds(160, 375, 200, 40);
+		panel_profil.add(btn_update_Done);
+		
 
 		// FIN TABLA PERFILES
 	}
 
-	private void txttitleActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txttitleActionPerformed
-		// TODO add your handling code here:
-	}
 
-	public void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_ValiderActionPerformed
-		// TODO add your handling code here:
-		if (textField_Tittle.getText().equals("") || Text_Description.getText().equals("") || textField_Date.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Enter all data", "Missing Data", JOptionPane.ERROR_MESSAGE);
-
-
-		} else {
-
-			HelpRequestController connexion = new HelpRequestController();
-			Helprequest newRequest = new Helprequest(textField_Tittle.getText(), Text_Description.getText(), new Date(), "waiting");
-			connexion.CreateHelpRequest(newRequest, userName);
-			new CustomDialog("add succesfuly", "Data saved", 3);
-			success = "add succesfuly";
-			show_table_dataActionPerformed(evt);
-			textField_Tittle.setText("");
-			Text_Description.setText("");
-			textField_Date.setText("");
-
-		}
-
-	}
-
-
-	private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTable1MouseClicked
 		// TODO add your handling code here:
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
-
+		
+		String tblID = tb1Model.getValueAt(TableRequest.getSelectedRow(), 0).toString();
 		String tbltitle = tb1Model.getValueAt(TableRequest.getSelectedRow(), 1).toString();
-		String tbldescription = tb1Model.getValueAt(TableRequest.getSelectedRow(), 3).toString();
 		String tbldate = tb1Model.getValueAt(TableRequest.getSelectedRow(), 2).toString();
-		String tblstatut = tb1Model.getValueAt(TableRequest.getSelectedRow(), 4).toString();
+		String tbldescription = tb1Model.getValueAt(TableRequest.getSelectedRow(), 3).toString();
+		String tblStatus = tb1Model.getValueAt(TableRequest.getSelectedRow(), 4).toString();
+		
 
+		System.out.println(tblID);
+		id_Request = Integer.parseInt(tblID);
 		textField_Tittle.setText(tbltitle);
 		Text_Description.setText(tbldescription);
 		textField_Date.setText(tbldate);
-		textField_Status.setText(tblstatut);
+		status_Request = tblStatus;
+
 	}
 
-	public void btnupdateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {// GEN-FIRST:event_btnupdateActionPerformed
+	private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {
 		// TODO add your handling code here:
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 
 		if (TableRequest.getSelectedRowCount() == 1) {
 			String title = textField_Tittle.getText();
 			String description = Text_Description.getText();
-			// Date date = txtdate.getText();
-			String statut = textField_Status.getText();
 			HelpRequestController connexion = new HelpRequestController();
+			Helprequest hr_uptaded = new Helprequest(id_Request, title, description);
+			
 			try {
-				connexion.UpdateHelpRequest(statut, title);
-
+				connexion.UpdateHelpRequest(hr_uptaded);
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
 
-			tb1Model.setValueAt(statut, TableRequest.getSelectedRow(), 3);
-			new CustomDialog("Update succesfuly", "Data updated", 3);
-			success ="Update succesfuly";
+			JOptionPane.showMessageDialog(this, "Update succesfully");
 			textField_Tittle.setText("");
 			Text_Description.setText("");
 			textField_Date.setText("");
-			textField_Status.setText("");
-
 		} else {
 			if (TableRequest.getRowCount() == 0) {
-				new CustomDialog("Table is empty", "Missing Data", 3);
-				error="Table is empty";
+				JOptionPane.showMessageDialog(this, "Table is empty", "Missing Data", JOptionPane.ERROR_MESSAGE);
 			} else {
-				error = "Please select Single Row for update";
-				new CustomDialog("Please select Single Row for update", "Missing Data", 3);
+				JOptionPane.showMessageDialog(this, "Please select Single Row for update", "Missing Data", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
 	}
+
 	
 	// SHOW ALL REQUEST 
 	private void show_table_dataActionPerformed(java.awt.event.ActionEvent evt)
@@ -460,10 +421,10 @@ public class VHelprequest extends JFrame {
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 		// Vider la table avant d'exécuter la mise à jour
 		tb1Model.setRowCount(0);
-		List<Helprequest> helprequestList = connexion.getAllRequests();
+		List<Helprequest> helprequestList = connexion.getRequestByUser(userName);
 
 		for (Helprequest hr : helprequestList) {
-			String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getDate().toString(), hr.getDescription(), hr.getStatus(), hr.getVolunteer() };
+			String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getStringDate(),  hr.getDescription(),  hr.getStatus(), hr.getVolunteer() };
 			tb1Model.addRow(tdData);
 		}
 	}
