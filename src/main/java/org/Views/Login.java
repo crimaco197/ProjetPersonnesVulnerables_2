@@ -141,7 +141,7 @@ public class Login extends JFrame {
                     try {
                         connexion = new UserController();
                     } catch (Exception ex) {
-                        //mensaje de error: error conectandose a la base de datos;
+                        JOptionPane.showMessageDialog(Login.this, "Error connecting to database. Try again later", "Error", JOptionPane.OK_OPTION);
                     }
                     int userID = connexion.VerifyUserCredentials(email.getText(), passwordString);
                     String FirstName = connexion.getName(email.getText(), passwordString);

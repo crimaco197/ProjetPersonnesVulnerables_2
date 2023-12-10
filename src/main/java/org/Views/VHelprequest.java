@@ -261,7 +261,7 @@ public class VHelprequest extends JFrame {
 		
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setForeground(new Color(0, 128, 128));
-		btn_show_table_data.setBackground(new Color(128, 128, 128));
+		btn_show_table_data.setBackground(new Color(169, 169, 169));
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_show_table_data.setText("Show All Requests");
 		btn_show_table_data.setBounds(200, 375, 200, 50);
@@ -341,7 +341,7 @@ public class VHelprequest extends JFrame {
 		btn_Create_Request = new JButton();
 		btn_Create_Request.setForeground(new Color(0, 128, 128));
 		panel_profil.add(btn_Create_Request);
-		btn_Create_Request.setBackground(Color.GRAY);
+		btn_Create_Request.setBackground(new Color(169,169,169));
 		btn_Create_Request.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_Create_Request.setText("Create Request");
 		btn_Create_Request.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +349,7 @@ public class VHelprequest extends JFrame {
                 try {
                     ValiderActionPerformed(evt);
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+					JOptionPane.showMessageDialog(VHelprequest.this, "Error connecting to database. Try again later", "Error", JOptionPane.OK_OPTION);
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }

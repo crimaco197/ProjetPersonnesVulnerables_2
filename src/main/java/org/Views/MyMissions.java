@@ -201,7 +201,7 @@ public class MyMissions extends JFrame {
 
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setForeground(new Color(0, 128, 128));
-		btn_show_table_data.setBackground(Color.GRAY);
+		btn_show_table_data.setBackground(new Color(169,169,169));
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_show_table_data.setText("Show Waiting Requests");
 		btn_show_table_data.setBounds(100, 375, 200, 50);
@@ -221,7 +221,7 @@ public class MyMissions extends JFrame {
 
 		btn_Postulate = new JButton();
 		btn_Postulate.setForeground(new Color(0, 128, 128));
-		btn_Postulate.setBackground(Color.GRAY);
+		btn_Postulate.setBackground(new Color (169,169,169));
 		btn_Postulate.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_Postulate.setText("Postulate");
 		btn_Postulate.setBounds(350, 375, 150, 50);
