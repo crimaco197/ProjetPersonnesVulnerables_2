@@ -400,7 +400,7 @@ public class VHelprequest extends JFrame {
 	}
 
 
-	private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+	public void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
 		// TODO add your handling code here:
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 
