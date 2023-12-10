@@ -211,7 +211,7 @@ public class SignUP extends JFrame {
         contentPane_Left.repaint();
 
     }
-    /*
+
     public JTextField getLastName() {
         return lastname;
     }
@@ -233,7 +233,7 @@ public class SignUP extends JFrame {
     public JButton getButlogin() {
         return btn_toLogin;
     }
-    */
+
     public String getMessi(){ return messi ; }
     public boolean isSignUpButtonClicked() {
         return loginButtonClicked;
