@@ -210,7 +210,7 @@ public class MyRequests extends JFrame {
 		
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setForeground(new Color(0, 128, 128));
-		btn_show_table_data.setBackground(new Color(128, 128, 128));
+		btn_show_table_data.setBackground(new Color(169, 169, 169));
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_show_table_data.setText("Show My Requests");
 		btn_show_table_data.setBounds(200, 375, 200, 50);
@@ -220,7 +220,7 @@ public class MyRequests extends JFrame {
 				try {
 					show_table_dataActionPerformed(evt);
 				} catch (SQLException e) {
-					throw new RuntimeException(e);
+					JOptionPane.showMessageDialog(MyRequests.this, "Error connecting to database. Try again later", "Error", JOptionPane.OK_OPTION);
 				} catch (ClassNotFoundException e) {
 					throw new RuntimeException(e);
 				}
@@ -298,7 +298,7 @@ public class MyRequests extends JFrame {
 		btn_update.setLocation(160, 320);
 		btn_update.setSize(200, 40);
 		panel_profil.add(btn_update);
-		btn_update.setBackground(Color.GRAY);
+		btn_update.setBackground(new Color(169,169,169));
 		btn_update.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 		btn_update.setText("Update Request");
 		btn_update.addActionListener(new java.awt.event.ActionListener() {
@@ -330,31 +330,39 @@ public class MyRequests extends JFrame {
 		btn_update_Done = new JButton();
 		btn_update_Done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (status_Request.equals("assigned")) {
-				HelpRequestController setUPtoDone;
-				try {
-					setUPtoDone = new HelpRequestController();
-					setUPtoDone.MarkRequestAsDone(id_Request);
-					JOptionPane.showMessageDialog(MyRequests.this, "Request Done", "Updated succesfully", JOptionPane.OK_OPTION);
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				try{
+					if (status_Request.equals("assigned")) {
+						HelpRequestController setUPtoDone;
+						try {
+							setUPtoDone = new HelpRequestController();
+							setUPtoDone.MarkRequestAsDone(id_Request);
+							JOptionPane.showMessageDialog(MyRequests.this, "Request Done", "Updated succesfully", JOptionPane.OK_OPTION);
+							show_table_dataActionPerformed(e);
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else if (status_Request.equals("done")) {
+						JOptionPane.showMessageDialog(MyRequests.this, "The request has been done", "Request Done", JOptionPane.OK_OPTION);
+					}else {
+						JOptionPane.showMessageDialog(MyRequests.this, "The request has not been assigned", "Missing Volunteer", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (NullPointerException e2){
+					JOptionPane.showMessageDialog(MyRequests.this, "No request has been selected to mark as done", "No request selected", JOptionPane.OK_OPTION);
 				}
-				}else if (status_Request.equals("done")) {
-					JOptionPane.showMessageDialog(MyRequests.this, "The request has been done", "Request Done", JOptionPane.OK_OPTION);
-				}else {
-					JOptionPane.showMessageDialog(MyRequests.this, "The request has not been assigned", "Missing Volunteer", JOptionPane.ERROR_MESSAGE);
-				}
-				
+
+
+
+
 			}
 		});
 		btn_update_Done.setText("Request Done");
 		btn_update_Done.setForeground(new Color(0, 128, 128));
 		btn_update_Done.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		btn_update_Done.setBackground(Color.GRAY);
+		btn_update_Done.setBackground(new Color (169,169,169));
 		btn_update_Done.setBounds(160, 375, 200, 40);
 		panel_profil.add(btn_update_Done);
 		

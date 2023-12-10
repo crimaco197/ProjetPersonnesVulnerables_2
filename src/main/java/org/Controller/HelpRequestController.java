@@ -15,14 +15,10 @@ public class HelpRequestController extends DatabaseController{
     public HelpRequestController() throws SQLException, ClassNotFoundException {
     }
 
-    public boolean CreateHelpRequest(Helprequest request){
-        try {
+    public boolean CreateHelpRequest(Helprequest request) throws SQLException {
             Statement statement = connection.createStatement();
             String SQLQuery1 = String.format("INSERT INTO HelpRequests (Title,Description,Status,Date) VALUES ('%s', '%s', 'waiting' ,'%s');", request.getTitle(), request.getDescription(), request.getStringDate());
             return statement.execute(SQLQuery1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public boolean CreateHelpRequest(Helprequest request, String userName){
