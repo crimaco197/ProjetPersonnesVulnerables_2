@@ -23,7 +23,7 @@ public class SignUPTest {
     }
 
 
-
+//pour utiliser ce test vous pouvez changer les donnees pourqu'elles soient pas dupliquées , et ca va marcher tres bien
    /* @Test
     public void testSuccessfulSignUp() {
         // Input: Valid user information
