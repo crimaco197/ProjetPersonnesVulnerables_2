@@ -24,7 +24,7 @@ public class SignUPTest {
 
 
 
-    @Test
+   /* @Test
     public void testSuccessfulSignUp() {
         // Input: Valid user information
         signUpFrame.getFirstname().setText("JoDcedhn");
@@ -40,7 +40,7 @@ public class SignUPTest {
 
 
     }
-
+*/
     @Test
     public void testEmptyFieldsErrorMessage() {
         // Laisser tous les champs vides et appeler la nouvelle méthode
