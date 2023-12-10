@@ -162,7 +162,7 @@ public class MyMissions extends JFrame {
 		btn_show_table_data = new JButton();
 		btn_show_table_data.setBackground(new java.awt.Color(0, 204, 0));
 		btn_show_table_data.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-		btn_show_table_data.setText("Show All Requests");
+		btn_show_table_data.setText("Show Waiting Requests");
 		btn_show_table_data.setBounds(100, 375, 200, 50);
 		panel_left.add(btn_show_table_data);
 		btn_show_table_data.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +195,8 @@ public class MyMissions extends JFrame {
 		            	controller = new HelpRequestController();
 		                controller.assignVolunteerToRequest(requestId, user); // Método ficticio, necesitas implementarlo
 		                JOptionPane.showMessageDialog(MyMissions.this, "You have been assigned as volunteer", "Success", JOptionPane.INFORMATION_MESSAGE);
+						show_table_dataActionPerformed(e);
+						fillVolunteerMissions(user);
 		            } catch (Exception ex) {
 		                JOptionPane.showMessageDialog(MyMissions.this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		                ex.printStackTrace();
@@ -261,10 +263,10 @@ public class MyMissions extends JFrame {
 		DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
 		// Vider la table avant d'exécuter la mise à jour
 		tb1Model.setRowCount(0);
-		List<Helprequest> helprequestList = connexion.getAllRequests();
+		List<Helprequest> helprequestList = connexion.getWaitingRequests();
 
 		for (Helprequest hr : helprequestList) {
-			String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getDate().toString(), hr.getDescription(), hr.getStatus() };
+			String tdData[] = {String.valueOf(hr.getID()), hr.getTitle(), hr.getDate().toString(), hr.getDescription(), hr.getStatus(), hr.getVolunteer() };
 			tb1Model.addRow(tdData);
 		}
 	}

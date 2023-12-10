@@ -168,7 +168,7 @@ public class VHelprequest extends JFrame {
 		
 		
 		// Column names
-        String[] columnNames = {"ID" ,"Title", "Date", "Description", "Statut", "Volunteer"};
+        String[] columnNames = {"ID" ,"Title", "Date", "Description", "Status", "Volunteer"};
         
         // Data for the table in a 2D array
         Object[][] data = {
@@ -347,18 +347,17 @@ public class VHelprequest extends JFrame {
 			JOptionPane.showMessageDialog(this, "Enter all data", "Missing Data", JOptionPane.ERROR_MESSAGE);
 
 		} else {
-			String data[] = { textField_Tittle.getText(), textField_Date.getText(), Text_Description.getText(),
+			/*String data[] = { textField_Tittle.getText(), textField_Date.getText(), Text_Description.getText(),
 					textField_Status.getText() };
 			DefaultTableModel tb1Model = (DefaultTableModel) TableRequest.getModel();
-			tb1Model.addRow(data);
-
-			JOptionPane.showMessageDialog(this, "add succesfuly");
+			tb1Model.addRow(data);*/
 
 			HelpRequestController connexion = new HelpRequestController();
 			Helprequest newRequest = new Helprequest(textField_Tittle.getText(), Text_Description.getText(), new Date(),
 					textField_Status.getText());
 			connexion.CreateHelpRequest(newRequest);
-			System.out.println("You have signed up");
+			JOptionPane.showMessageDialog(this, "add succesfuly");
+			show_table_dataActionPerformed(evt);
 			textField_Tittle.setText("");
 			Text_Description.setText("");
 			textField_Date.setText("");
