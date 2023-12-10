@@ -37,7 +37,7 @@ public class HelpRequestController extends DatabaseController{
 
     public boolean UpdateHelpRequest(Helprequest helprequest) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQLQuery1 = String.format("UPDATE HelpRequests SET Title = '%s', Description = '%s', Status = '%s', Date = '%s', RequestBy = '%i', Volunteer = '%i' WHERE ID = '%s'", helprequest.getTitle(), helprequest.getDescription(),helprequest.getStatus(), helprequest.getStringDate(), helprequest.getRequestBy(), helprequest.getVolunteer(), helprequest.getID());
+        String SQLQuery1 = String.format("UPDATE HelpRequests SET Title = '%s', Description = '%s' WHERE ID = '%s'", helprequest.getTitle(), helprequest.getDescription(), helprequest.getID());
         return statement.execute(SQLQuery1);
     }
 
@@ -169,6 +169,12 @@ public class HelpRequestController extends DatabaseController{
         }
 
         return volunteerRequests;
+    }
+
+    public boolean MarkRequestAsDone(int requestID) throws SQLException {
+        Statement statement = connection.createStatement();
+        String SQLQuery1 = String.format("UPDATE HelpRequests SET Status = 'done' WHERE ID = '%d'", requestID);
+        return statement.execute(SQLQuery1);
     }
 
 }
